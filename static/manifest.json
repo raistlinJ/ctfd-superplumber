@@ -1,0 +1,121 @@
+{
+  "main.css": {
+    "file": "assets/main.DhQtLFUV.css"
+  },
+  "assets/js/main.js": {
+    "file": "assets/main.B7v1Rheq.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js"
+    ],
+    "css": [
+      "assets/main.DhQtLFUV.css"
+    ]
+  },
+  "main.js": {
+    "file": "assets/main.B7v1Rheq.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js"
+    ],
+    "css": [
+      "assets/main.DhQtLFUV.css"
+    ]
+  },
+  "assets/js/notifications.js": {
+    "file": "assets/notifications.ti1iw9ol.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.BhDPMm3o.js"
+    ]
+  },
+  "assets/js/settings.js": {
+    "file": "assets/settings.-0vE22yy.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.BhDPMm3o.js",
+      "assets/clipboard.CfWndw0T.js"
+    ]
+  },
+  "assets/js/setup.js": {
+    "file": "assets/setup.57NqMLWX.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.BhDPMm3o.js"
+    ]
+  },
+  "assets/js/teams/list.js": {
+    "file": "assets/teamsList.DS8XsOOu.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.BhDPMm3o.js"
+    ]
+  },
+  "assets/js/teams/private.js": {
+    "file": "assets/teamsPrivate.kSWc23ja.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.BhDPMm3o.js",
+      "assets/clipboard.CfWndw0T.js",
+      "assets/index.C5GHsEEB.js"
+    ]
+  },
+  "clipboard.js": {
+    "file": "assets/clipboard.CfWndw0T.js",
+    "isEntry": false,
+    "imports": [
+      "assets/index.BhDPMm3o.js"
+    ]
+  },
+  "assets/js/teams/public.js": {
+    "file": "assets/teamsPublic.DGg89tHe.js",
+    "isEntry": true,
+    "imports": [
+      "assets/index.BhDPMm3o.js",
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.C5GHsEEB.js"
+    ]
+  },
+  "assets/js/users/list.js": {
+    "file": "assets/usersList.DS8XsOOu.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.BhDPMm3o.js"
+    ]
+  },
+  "assets/js/users/private.js": {
+    "file": "assets/usersPrivate.DKxlsw1i.js",
+    "isEntry": true,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.BhDPMm3o.js",
+      "assets/index.C5GHsEEB.js"
+    ]
+  },
+  "assets/js/users/public.js": {
+    "file": "assets/usersPublic.0zjobxXt.js",
+    "isEntry": true,
+    "imports": [
+      "assets/index.BhDPMm3o.js",
+      "assets/relativeTime.GKSnQAGw.js",
+      "assets/index.C5GHsEEB.js"
+    ]
+  },
+  "index.js": {
+    "file": "assets/index.BhDPMm3o.js",
+    "isEntry": false,
+    "imports": [
+      "assets/relativeTime.GKSnQAGw.js"
+    ]
+  },
+  "relativeTime.js": {
+    "file": "assets/relativeTime.GKSnQAGw.js",
+    "isEntry": false
+  }
+}

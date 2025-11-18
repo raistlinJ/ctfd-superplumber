@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Home - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card mario-shadow">
+            <div class="card-header text-center">
+                <h1>🍄 Welcome to {{ Configs.ctf_name or 'CTF' }}!</h1>
+            </div>
+            <div class="card-body text-center py-5">
+                {% if ctf_description() %}
+                    <div class="lead mb-4">
+                        {{ ctf_description() | safe }}
+                    </div>
+                {% else %}
+                    <p class="lead mb-4">
+                        Welcome to the Mushroom Kingdom CTF! Complete challenges, earn coins, and climb the leaderboard!
+                    </p>
+                {% endif %}
+
+                {% if authed() %}
+                    <div class="mb-4">
+                        <h3 class="mb-3">🎮 Your Stats</h3>
+                        <div class="row justify-content-center">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="score-display">{{ score() }}</h4>
+                                        <p class="mb-0">Total Score</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="text-luigi-green">{{ solves() }}</h4>
+                                        <p class="mb-0">Solves</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="{{ url_for('challenges.listing') }}" class="btn btn-primary btn-lg me-2">
+                        🏰 View Challenges
+                    </a>
+                    <a href="{{ url_for('scoreboard.listing') }}" class="btn btn-warning btn-lg">
+                        🏆 View Scoreboard
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-success btn-lg me-2">
+                        ⭐ Register Now
+                    </a>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg">
+                        🔑 Login
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if ctf_started() and not ctf_ended() %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            ⏰ CTF is currently running! Good luck!
+        </div>
+    </div>
+</div>
+{% elif not ctf_started() %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="alert alert-warning text-center">
+            🕐 CTF hasn't started yet. Check back at {{ ctf_start() }}
+        </div>
+    </div>
+</div>
+{% elif ctf_ended() %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="alert alert-danger text-center">
+            🏁 CTF has ended! Thanks for playing!
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

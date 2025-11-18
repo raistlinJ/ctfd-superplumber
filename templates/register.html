@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Register - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card mario-shadow">
+            <div class="card-header text-center">
+                <h1>⭐ Register</h1>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-center mb-4">
+                    Join the adventure in the Mushroom Kingdom!
+                </p>
+                
+                <form method="POST" action="{{ url_for('auth.register') }}">
+                    {{ form.csrf_token }}
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-bold">
+                            👤 Username
+                        </label>
+                        {{ form.name(class="form-control", placeholder="Choose your username") }}
+                        {% if form.name.errors %}
+                            <div class="text-danger mt-1">
+                                {% for error in form.name.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold">
+                            📧 Email
+                        </label>
+                        {{ form.email(class="form-control", placeholder="your.email@example.com") }}
+                        {% if form.email.errors %}
+                            <div class="text-danger mt-1">
+                                {% for error in form.email.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label fw-bold">
+                            🔒 Password
+                        </label>
+                        {{ form.password(class="form-control", placeholder="Create a strong password") }}
+                        {% if form.password.errors %}
+                            <div class="text-danger mt-1">
+                                {% for error in form.password.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if config.get('REGISTRATION_CODE') %}
+                    <div class="mb-3">
+                        <label for="code" class="form-label fw-bold">
+                            🎫 Registration Code
+                        </label>
+                        {{ form.code(class="form-control", placeholder="Enter registration code") }}
+                        {% if form.code.errors %}
+                            <div class="text-danger mt-1">
+                                {% for error in form.code.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            🍄 Power Up!
+                        </button>
+                    </div>
+                </form>
+                
+                <hr>
+                
+                <div class="text-center">
+                    <p class="mb-0">
+                        Already have an account? 
+                        <a href="{{ url_for('auth.login') }}" class="text-decoration-none fw-bold">
+                            🔑 Login here
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

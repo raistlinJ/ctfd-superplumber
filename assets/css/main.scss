@@ -1,0 +1,489 @@
+/* Super Mario Theme - Main Stylesheet */
+
+/* Import Bootstrap */
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+/* Custom Mario Color Palette */
+:root {
+  /* Main Mario Colors */
+  --mario-red: #E52521;
+  --mario-red-dark: #C41E1A;
+  --mushroom-tan: #F0AF20;
+  --luigi-green: #00A651;
+  --sky-blue: #049CD8;
+  --block-brown: #8B4513;
+  --coin-gold: #FFD700;
+  --pipe-green: #00A859;
+  --star-yellow: #FFF44F;
+  
+  /* UI Colors */
+  --ground-color: #DEB887;
+  --cloud-white: #FFFFFF;
+  --night-dark: #0F0F3F;
+  --brick-red: #B85C38;
+  
+  /* Override Bootstrap primary */
+  --bs-primary: var(--mario-red);
+  --bs-primary-rgb: 229, 37, 33;
+  --bs-secondary: var(--mushroom-tan);
+  --bs-success: var(--luigi-green);
+  --bs-info: var(--sky-blue);
+  --bs-warning: var(--coin-gold);
+  --bs-danger: var(--mario-red);
+}
+
+/* Pixel Font Import (Google Fonts - Press Start 2P) */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Global Styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(180deg, var(--sky-blue) 0%, var(--sky-blue) 70%, var(--ground-color) 70%, var(--ground-color) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Pixel clouds background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(ellipse 120px 60px at 20% 15%, var(--cloud-white) 50%, transparent 50%),
+    radial-gradient(ellipse 120px 60px at 60% 25%, var(--cloud-white) 50%, transparent 50%),
+    radial-gradient(ellipse 120px 60px at 85% 10%, var(--cloud-white) 50%, transparent 50%);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Headers with Pixel Font */
+h1, h2, h3, h4, h5, h6, .pixel-font {
+  font-family: 'Press Start 2P', cursive;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; }
+h4 { font-size: 0.9rem; }
+h5, h6 { font-size: 0.75rem; }
+
+/* Navbar - Mario Style */
+.navbar {
+  background: linear-gradient(180deg, var(--mario-red) 0%, var(--mario-red-dark) 100%) !important;
+  border-bottom: 4px solid var(--block-brown);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 1rem 0;
+}
+
+.navbar-brand {
+  font-family: 'Press Start 2P', cursive;
+  color: white !important;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 600;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--coin-gold) !important;
+  transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--coin-gold);
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 80%;
+}
+
+/* Buttons - Question Block Style */
+.btn {
+  font-weight: 700;
+  border-radius: 8px;
+  border: 3px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--mario-red) 0%, var(--mario-red-dark) 100%);
+  border-color: var(--mario-red-dark);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(180deg, #FF3B37 0%, var(--mario-red) 100%);
+  border-color: var(--mario-red);
+}
+
+.btn-success {
+  background: linear-gradient(180deg, var(--luigi-green) 0%, #008C43 100%);
+  border-color: #008C43;
+}
+
+.btn-warning {
+  background: linear-gradient(180deg, var(--coin-gold) 0%, #E6BE00 100%);
+  border-color: #E6BE00;
+  color: #333;
+}
+
+.btn-info {
+  background: linear-gradient(180deg, var(--sky-blue) 0%, #0385C0 100%);
+  border-color: #0385C0;
+}
+
+/* Cards - Block Style */
+.card {
+  border: 4px solid var(--block-brown);
+  border-radius: 12px;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  background: linear-gradient(180deg, var(--mushroom-tan) 0%, #D89B1C 100%);
+  border-bottom: 3px solid var(--block-brown);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.85rem;
+  color: #333;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Challenge Cards */
+.challenge-card {
+  position: relative;
+  overflow: visible;
+}
+
+.challenge-card::before {
+  content: '?';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--mushroom-tan) 0%, #D89B1C 100%);
+  border: 3px solid var(--block-brown);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.challenge-solved::before {
+  content: '✓';
+  background: linear-gradient(135deg, var(--luigi-green) 0%, #008C43 100%);
+}
+
+/* Badges - Coin Style */
+.badge {
+  font-weight: 700;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+}
+
+.badge-primary {
+  background: var(--mario-red);
+}
+
+.badge-success {
+  background: var(--luigi-green);
+}
+
+.badge-warning {
+  background: var(--coin-gold);
+  color: #333;
+}
+
+.badge-info {
+  background: var(--sky-blue);
+}
+
+/* Score Display - Coin Counter */
+.score-display {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  color: var(--coin-gold);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.score-display::before {
+  content: '🪙';
+  font-size: 1.5rem;
+}
+
+/* Alerts - Info Boxes */
+.alert {
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.alert-success {
+  background: var(--luigi-green);
+  color: white;
+  border-color: #008C43;
+}
+
+.alert-danger {
+  background: var(--mario-red);
+  color: white;
+  border-color: var(--mario-red-dark);
+}
+
+.alert-warning {
+  background: var(--coin-gold);
+  color: #333;
+  border-color: #E6BE00;
+}
+
+.alert-info {
+  background: var(--sky-blue);
+  color: white;
+  border-color: #0385C0;
+}
+
+/* Tables */
+.table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table thead {
+  background: linear-gradient(180deg, var(--block-brown) 0%, #6D3510 100%);
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+}
+
+.table tbody tr:nth-child(even) {
+  background: rgba(240, 175, 32, 0.1);
+}
+
+.table tbody tr:hover {
+  background: rgba(240, 175, 32, 0.2);
+  transform: scale(1.01);
+}
+
+/* Footer - Ground Style */
+.footer {
+  background: linear-gradient(180deg, var(--ground-color) 0%, #C4965C 100%);
+  border-top: 4px solid var(--block-brown);
+  margin-top: 4rem;
+  padding: 2rem 0;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+  color: #333;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Progress Bars - Power-up Style */
+.progress {
+  height: 30px;
+  border-radius: 15px;
+  border: 3px solid var(--block-brown);
+  background: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--luigi-green) 0%, var(--pipe-green) 100%);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  line-height: 24px;
+  animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Forms */
+.form-control, .form-select {
+  border: 3px solid var(--block-brown);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 600;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--mario-red);
+  box-shadow: 0 0 0 0.25rem rgba(229, 37, 33, 0.25);
+}
+
+/* Modal - Castle Window */
+.modal-content {
+  border: 4px solid var(--block-brown);
+  border-radius: 16px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  background: linear-gradient(180deg, var(--mario-red) 0%, var(--mario-red-dark) 100%);
+  color: white;
+  border-bottom: 3px solid var(--block-brown);
+  font-family: 'Press Start 2P', cursive;
+}
+
+.modal-footer {
+  background: rgba(240, 175, 32, 0.1);
+  border-top: 3px solid var(--block-brown);
+}
+
+/* Animations */
+@keyframes coin-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.coin-animation {
+  animation: coin-bounce 0.5s ease-in-out infinite;
+}
+
+@keyframes block-bump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Leaderboard - Podium Style */
+.leaderboard-entry {
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.leaderboard-entry:hover {
+  border-left-color: var(--coin-gold);
+  background: rgba(255, 215, 0, 0.1);
+  transform: translateX(5px);
+}
+
+.leaderboard-entry:nth-child(1) .rank {
+  color: var(--coin-gold);
+  font-size: 1.5rem;
+}
+
+.leaderboard-entry:nth-child(2) .rank {
+  color: #C0C0C0;
+  font-size: 1.3rem;
+}
+
+.leaderboard-entry:nth-child(3) .rank {
+  color: #CD7F32;
+  font-size: 1.2rem;
+}
+
+/* Utility Classes */
+.pixel-border {
+  border: 4px solid var(--block-brown);
+  border-radius: 8px;
+}
+
+.mario-shadow {
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.text-mario-red { color: var(--mario-red); }
+.text-luigi-green { color: var(--luigi-green); }
+.text-coin-gold { color: var(--coin-gold); }
+.text-sky-blue { color: var(--sky-blue); }
+
+.bg-mario-red { background-color: var(--mario-red); }
+.bg-luigi-green { background-color: var(--luigi-green); }
+.bg-coin-gold { background-color: var(--coin-gold); }
+.bg-sky-blue { background-color: var(--sky-blue); }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  h1 { font-size: 1.2rem; }
+  h2 { font-size: 1rem; }
+  h3 { font-size: 0.9rem; }
+  
+  .navbar-brand {
+    font-size: 0.9rem;
+  }
+  
+  .card-header {
+    font-size: 0.7rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+  }
+  
+  body::before {
+    display: none;
+  }
+  
+  .navbar, .footer {
+    display: none;
+  }
+}

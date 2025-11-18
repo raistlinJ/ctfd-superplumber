@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Challenges - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card mario-shadow">
+            <div class="card-header">
+                <h1>🏰 Challenges</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead">Complete challenges to earn coins and climb the leaderboard!</p>
+                
+                <!-- Category Filter -->
+                <div class="btn-group mb-3" role="group">
+                    <button type="button" class="btn btn-primary active" data-filter="all">
+                        All Worlds
+                    </button>
+                    {% for category in categories %}
+                    <button type="button" class="btn btn-outline-primary" data-filter="{{ category }}">
+                        {{ category }}
+                    </button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Challenge Grid -->
+<div class="row g-4" id="challenges-grid">
+    {% for challenge in challenges %}
+    <div class="col-md-6 col-lg-4 challenge-item" data-category="{{ challenge.category }}">
+        <div class="card challenge-card {% if challenge.solved_by_me %}challenge-solved{% endif %} h-100 mario-shadow">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span class="text-truncate">{{ challenge.name }}</span>
+                <span class="badge badge-warning">{{ challenge.value }} 🪙</span>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="badge bg-mario-red">{{ challenge.category }}</span>
+                    <small class="text-muted">
+                        {% if challenge.solves %}
+                            {{ challenge.solves }} {% if challenge.solves == 1 %}solve{% else %}solves{% endif %}
+                        {% else %}
+                            No solves yet
+                        {% endif %}
+                    </small>
+                </div>
+                
+                {% if challenge.solved_by_me %}
+                <div class="alert alert-success py-2 mb-2">
+                    ✓ Solved!
+                </div>
+                {% endif %}
+                
+                <div class="challenge-tags mb-2">
+                    {% for tag in challenge.tags %}
+                    <span class="badge badge-info me-1">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                
+                <a href="{{ url_for('challenges.view', challenge_id=challenge.id) }}" 
+                   class="btn btn-primary w-100">
+                    {% if challenge.solved_by_me %}
+                        View Challenge
+                    {% else %}
+                        Start Challenge
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if not challenges %}
+<div class="row">
+    <div class="col-12">
+        <div class="card mario-shadow text-center">
+            <div class="card-body py-5">
+                <h3>🍄 No challenges available yet!</h3>
+                <p class="text-muted">Check back soon for new adventures!</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Challenge filtering
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    const challenges = document.querySelectorAll('.challenge-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+            
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter challenges
+            challenges.forEach(challenge => {
+                if (filter === 'all' || challenge.dataset.category === filter) {
+                    challenge.style.display = '';
+                } else {
+                    challenge.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

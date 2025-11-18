@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Teams - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card mario-shadow">
+            <div class="card-header">
+                <h1>👥 Teams</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead">Browse all teams competing in the CTF!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mario-shadow">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Team Name</th>
+                                <th class="text-end">Members</th>
+                                <th class="text-end">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for team in teams %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('teams.public', team_id=team.id) }}" 
+                                       class="text-decoration-none fw-bold">
+                                        {{ team.name }}
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <span class="badge bg-info">{{ team.member_count }} 👤</span>
+                                </td>
+                                <td class="text-end">
+                                    <span class="score-display" style="font-size: 0.9rem;">
+                                        {{ team.score }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not teams %}
+<div class="row">
+    <div class="col-12">
+        <div class="card mario-shadow text-center">
+            <div class="card-body py-5">
+                <h3>🍄 No teams yet!</h3>
+                <p class="text-muted">Be the first to create a team!</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

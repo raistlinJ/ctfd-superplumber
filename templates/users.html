@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Users - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card mario-shadow">
+            <div class="card-header">
+                <h1>👤 Users</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead">Browse all players in the CTF!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mario-shadow">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th class="text-end">Score</th>
+                                <th class="text-end">Solves</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('users.public', user_id=user.id) }}" 
+                                       class="text-decoration-none fw-bold">
+                                        {{ user.name }}
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <span class="score-display" style="font-size: 0.9rem;">
+                                        {{ user.score }}
+                                    </span>
+                                </td>
+                                <td class="text-end">
+                                    <span class="badge bg-luigi-green">
+                                        {{ user.solves }} ✓
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not users %}
+<div class="row">
+    <div class="col-12">
+        <div class="card mario-shadow text-center">
+            <div class="card-body py-5">
+                <h3>🍄 No users yet!</h3>
+                <p class="text-muted">Be the first to register!</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

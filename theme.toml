@@ -1,0 +1,9 @@
+[theme]
+name = "Super Mario Theme"
+version = "1.0.0"
+author = "CTFd Community"
+description = "A Super Mario Bros themed CTFd interface with retro gaming aesthetics"
+
+[theme.settings]
+# Enable custom settings for the theme
+allow_html_description = true

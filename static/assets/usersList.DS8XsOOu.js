@@ -1,0 +1,1 @@
+import{m as t}from"./relativeTime.GKSnQAGw.js";import{C as o}from"./index.BhDPMm3o.js";function i(){import.meta.url,import("_").catch(()=>1),async function*(){}().next()}window.CTFd=o;window.Alpine=t;t.start();export{i as __vite_legacy_guard};

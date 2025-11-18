@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title or (Configs.ctf_name or 'CTF') }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 offset-lg-1">
+        <div class="card mario-shadow">
+            <div class="card-header">
+                <h1>{{ title or (Configs.ctf_name or 'CTF') }}</h1>
+            </div>
+            <div class="card-body">
+                <div class="content">
+                    {{ content | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

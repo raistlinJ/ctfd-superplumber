@@ -1,0 +1,1 @@
+System.register(["./relativeTime-legacy.5DXx4rWe.js","./index-legacy.BqBXe2ll.js"],function(e,t){"use strict";var i,n;return{setters:[e=>{i=e.m},e=>{n=e.C}],execute:function(){window.CTFd=n,window.Alpine=i,i.start()}}});

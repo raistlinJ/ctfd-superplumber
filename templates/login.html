@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Login - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card mario-shadow">
+            <div class="card-header text-center">
+                <h1>🔑 Login</h1>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('auth.login') }}">
+                    {{ form.csrf_token }}
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-bold">
+                            👤 Username or Email
+                        </label>
+                        {{ form.name(class="form-control", placeholder="Enter your username") }}
+                        {% if form.name.errors %}
+                            <div class="text-danger mt-1">
+                                {% for error in form.name.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label fw-bold">
+                            🔒 Password
+                        </label>
+                        {{ form.password(class="form-control", placeholder="Enter your password") }}
+                        {% if form.password.errors %}
+                            <div class="text-danger mt-1">
+                                {% for error in form.password.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100">
+                            🚀 Start Adventure
+                        </button>
+                    </div>
+                </form>
+                
+                <hr>
+                
+                <div class="text-center">
+                    <p class="mb-2">
+                        <a href="{{ url_for('auth.reset_password') }}" class="text-decoration-none">
+                            🔧 Forgot Password?
+                        </a>
+                    </p>
+                    <p class="mb-0">
+                        Don't have an account? 
+                        <a href="{{ url_for('auth.register') }}" class="text-decoration-none fw-bold">
+                            ⭐ Register here
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

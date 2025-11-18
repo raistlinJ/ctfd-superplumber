@@ -1,0 +1,52 @@
+/* Lightweight CodeMirror defaults to keep admin editors styled even when the upstream asset is missing. */
+.CodeMirror{font-family:SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:0.95rem;line-height:1.5;direction:ltr;background-color:#121212;color:#f8f8f2;height:auto;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:0.5rem;}
+.CodeMirror-lines{padding:8px 0;}
+.CodeMirror pre{padding:0 12px;line-height:inherit;color:inherit}
+.CodeMirror-scroll{overflow:scroll!important;margin-bottom:-30px;margin-right:-30px;padding-bottom:30px;padding-right:30px}
+.CodeMirror-sizer{position:relative;border-right:30px solid transparent}
+.CodeMirror-gutters{position:absolute;left:0;top:0;min-width:3.5rem;height:100%;border-right:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);white-space:nowrap}
+.CodeMirror-linenumber{padding:0 10px;text-align:right;color:#7f8c98;min-width:2.5rem}
+.CodeMirror-guttermarker{color:#e67e22}
+.CodeMirror-guttermarker-subtle{color:#a0aec0}
+.CodeMirror-cursor{border-left:2px solid #50fa7b;border-right:none;width:0}
+.CodeMirror div.CodeMirror-cursor{transition:opacity .15s ease}
+.CodeMirror-overwrite .CodeMirror-cursor{border-bottom:2px solid #50fa7b;border-left:none}
+.cm-fat-cursor .CodeMirror-cursor{width:auto;border:0;background:rgba(80,250,123,.35)}
+.cm-s-default .cm-keyword{color:#ff79c6}
+.cm-s-default .cm-atom{color:#bd93f9}
+.cm-s-default .cm-number{color:#f1fa8c}
+.cm-s-default .cm-def{color:#50fa7b}
+.cm-s-default .cm-variable{color:#f8f8f2}
+.cm-s-default .cm-variable-2{color:#8be9fd}
+.cm-s-default .cm-variable-3{color:#bd93f9}
+.cm-s-default .cm-type{color:#8be9fd}
+.cm-s-default .cm-property{color:#66d9ef}
+.cm-s-default .cm-operator{color:#ffb86c}
+.cm-s-default .cm-comment{color:#6272a4;font-style:italic}
+.cm-s-default .cm-string{color:#f1fa8c}
+.cm-s-default .cm-string-2{color:#2ecc71}
+.cm-s-default .cm-meta{color:#f8f8f2}
+.cm-s-default .cm-error{color:#ff5555;text-decoration:underline}
+.cm-s-default .cm-qualifier{color:#8be9fd}
+.cm-s-default .cm-builtin{color:#61dafb}
+.cm-s-default .cm-bracket{color:#f8f8f2}
+.cm-s-default .cm-tag{color:#ff79c6}
+.cm-s-default .cm-attribute{color:#50fa7b}
+.cm-s-default .cm-hr{color:#c0c0c0}
+.CodeMirror-activeline-background{background:rgba(80,250,123,.08)}
+.CodeMirror-matchingbracket,
+.CodeMirror-matchingtag{outline:1px solid rgba(80,250,123,.8);color:inherit}
+.CodeMirror-selected{background:rgba(40,94,255,.25)!important}
+.CodeMirror-focused .CodeMirror-selected{background:rgba(40,94,255,.35)!important}
+.CodeMirror-linebackground{position:absolute;left:0;right:0}
+.CodeMirror-linewidget{position:relative;z-index:2;margin:.1em 0}
+.CodeMirror-hints{position:absolute;z-index:99;list-style:none;margin:0;padding:0;border:1px solid rgba(0,0,0,.2);box-shadow:0 .5rem 1rem rgba(0,0,0,.35);background:#1f1f1f;border-radius:.35rem;max-height:14rem;overflow:auto}
+.CodeMirror-hint{margin:0;padding:.35rem .75rem;color:#f8f8f2;cursor:pointer;white-space:pre}
+.CodeMirror-hint-active{background:#2b2b2b;color:#50fa7b}
+@media (prefers-color-scheme:light){
+  .CodeMirror{background-color:#fefefe;color:#1f2022;border-color:rgba(0,0,0,.08)}
+  .CodeMirror-gutters{background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.08)}
+  .CodeMirror-linenumber{color:#94a3b8}
+  .CodeMirror-selected{background:rgba(17,24,39,.08)!important}
+  .CodeMirror-focused .CodeMirror-selected{background:rgba(17,24,39,.16)!important}
+}

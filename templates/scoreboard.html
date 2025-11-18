@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Scoreboard - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card mario-shadow">
+            <div class="card-header">
+                <h1>🏆 Scoreboard</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead">Top players in the Mushroom Kingdom!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mario-shadow">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Rank</th>
+                                <th>Player</th>
+                                <th class="text-end">Score</th>
+                                <th class="text-end">Solves</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in standings %}
+                            <tr class="leaderboard-entry">
+                                <td class="rank fw-bold">
+                                    {% if loop.index == 1 %}
+                                        🥇
+                                    {% elif loop.index == 2 %}
+                                        🥈
+                                    {% elif loop.index == 3 %}
+                                        🥉
+                                    {% else %}
+                                        {{ loop.index }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('users.public', user_id=entry.account_id) }}" 
+                                       class="text-decoration-none fw-bold">
+                                        {{ entry.name }}
+                                    </a>
+                                    {% if entry.account_id == session.get('id') %}
+                                        <span class="badge badge-warning ms-2">You</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end">
+                                    <span class="score-display" style="font-size: 0.9rem;">
+                                        {{ entry.score }}
+                                    </span>
+                                </td>
+                                <td class="text-end">
+                                    <span class="badge bg-luigi-green">
+                                        {{ entry.solves }} ✓
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not standings %}
+<div class="row">
+    <div class="col-12">
+        <div class="card mario-shadow text-center">
+            <div class="card-body py-5">
+                <h3>🍄 No scores yet!</h3>
+                <p class="text-muted">Be the first to solve challenges and claim the top spot!</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Pagination -->
+{% if pages > 1 %}
+<div class="row mt-4">
+    <div class="col-12">
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% for i in range(1, pages + 1) %}
+                <li class="page-item {% if i == page %}active{% endif %}">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
