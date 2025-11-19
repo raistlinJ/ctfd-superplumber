@@ -34,9 +34,9 @@
             {% include "components/errors.html" %}
 
             {% with form = Forms.self.SettingsForm(language=language, country=country) %}
-              <form
-                  method="post" accept-charset="utf-8" autocomplete="off" role="form"
-                  x-data="SettingsForm"
+                  <form
+                    method="post" accept-charset="utf-8" autocomplete="off" role="form"
+                    x-data="SettingsForm"
                   @submit.prevent="updateProfile()"
                   class="form-horizontal"
               >
@@ -242,7 +242,7 @@
                       <td class="text-center">
                         <span
                             class="delete-token" role="button"
-                            @click="deleteTokenModal({{ token.id }})">
+                            @click='deleteTokenModal({{ token.id }})'>
                             <i class="cursor-pointer fas fa-times"></i>
                         </span>
                       </td>
@@ -262,6 +262,6 @@
 {% endblock %}
 
 {% block scripts %}
-  {{ super() }}
   {{ Assets.js("assets/js/settings.js") }}
+  {{ super() }}
 {% endblock %}

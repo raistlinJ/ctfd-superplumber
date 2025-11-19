@@ -4,9 +4,9 @@ import { colorHash } from "@ctfdio/ctfd-js/ui";
 import { getOption as getUserScoreOption } from "../utils/graphs/echarts/userscore";
 import { embed } from "../utils/graphs/echarts";
 
-window.Alpine = Alpine;
+const ensureAlpine = () => window.Alpine || Alpine;
 
-Alpine.data("UserGraphs", () => ({
+const userGraphs = () => ({
   solves: null,
   fails: null,
   awards: null,
@@ -15,18 +15,30 @@ Alpine.data("UserGraphs", () => ({
   awardCount: 0,
 
   getSolvePercentage() {
-    return ((this.solveCount / (this.solveCount + this.failCount)) * 100).toFixed(2);
+    const total = this.solveCount + this.failCount;
+    if (!total) {
+      return 0;
+    }
+    return ((this.solveCount / total) * 100).toFixed(2);
   },
 
   getFailPercentage() {
-    return ((this.failCount / (this.solveCount + this.failCount)) * 100).toFixed(2);
+    const total = this.solveCount + this.failCount;
+    if (!total) {
+      return 0;
+    }
+    return ((this.failCount / total) * 100).toFixed(2);
   },
 
   getCategoryBreakdown() {
+    if (!this.solves?.data?.length) {
+      return [];
+    }
+
     const categories = [];
     const breakdown = {};
 
-    this.solves.data.map(solve => {
+    this.solves.data.forEach(solve => {
       categories.push(solve.challenge.category);
     });
 
@@ -40,15 +52,11 @@ Alpine.data("UserGraphs", () => ({
 
     const data = [];
     for (const property in breakdown) {
-      const percent = Number((breakdown[property] / categories.length) * 100).toFixed(
-        2,
-      );
-
       data.push({
         name: property,
         count: breakdown[property],
         color: colorHash(property),
-        percent,
+        percent: ((breakdown[property] / categories.length) * 100).toFixed(2),
       });
     }
 
@@ -64,7 +72,7 @@ Alpine.data("UserGraphs", () => ({
     this.failCount = this.fails.meta.count;
     this.awardCount = this.awards.meta.count;
 
-    let optionMerge = window.userScoreGraphChartOptions;
+    const optionMerge = window.userScoreGraphChartOptions;
 
     embed(
       this.$refs.scoregraph,
@@ -77,6 +85,21 @@ Alpine.data("UserGraphs", () => ({
       ),
     );
   },
-}));
+});
 
-Alpine.start();
+const registerUserComponents = () => {
+  const AlpineInstance = ensureAlpine();
+
+  if (!AlpineInstance) {
+    return;
+  }
+
+  AlpineInstance.data("UserGraphs", userGraphs);
+  window.UserGraphs = userGraphs;
+};
+
+if (window.Alpine) {
+  registerUserComponents();
+} else {
+  document.addEventListener("alpine:init", registerUserComponents, { once: true });
+}

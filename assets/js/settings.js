@@ -5,9 +5,8 @@ import { serializeJSON } from "@ctfdio/ctfd-js/forms";
 import CTFd from "./index";
 import { copyToClipboard } from "./utils/clipboard";
 
-window.Alpine = Alpine;
-
-Alpine.data("SettingsForm", () => ({
+const registerSettingsStores = () => {
+  Alpine.data("SettingsForm", () => ({
   success: null,
   error: null,
   initial: null,
@@ -57,9 +56,9 @@ Alpine.data("SettingsForm", () => ({
       });
     }
   },
-}));
+  }));
 
-Alpine.data("TokensForm", () => ({
+  Alpine.data("TokensForm", () => ({
   token: null,
 
   async generateToken() {
@@ -77,9 +76,9 @@ Alpine.data("TokensForm", () => ({
   copyToken() {
     copyToClipboard(this.$refs.token);
   },
-}));
+  }));
 
-Alpine.data("Tokens", () => ({
+  Alpine.data("Tokens", () => ({
   selectedTokenId: null,
 
   async deleteTokenModal(tokenId) {
@@ -95,6 +94,11 @@ Alpine.data("Tokens", () => ({
       $token.remove();
     }
   },
-}));
+  }));
+};
 
-Alpine.start();
+if (window.Alpine) {
+  registerSettingsStores();
+} else {
+  document.addEventListener("alpine:init", registerSettingsStores, { once: true });
+}

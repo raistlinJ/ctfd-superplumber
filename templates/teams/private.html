@@ -486,6 +486,7 @@
 {% endblock %}
 
 {% block scripts %}
+  {{ Assets.js("assets/js/teams/private.js") }}
   {{ super() }}
   <script>
       window.stats_data = {{ {
@@ -497,5 +498,4 @@
 
       window.team_captain = {{ (user.id == team.captain_id) | tojson }};
   </script>
-  {{ Assets.js("assets/js/teams/private.js") }}
 {% endblock %}

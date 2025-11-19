@@ -1,19 +1,11 @@
 {
-  "assets/img/superplumber/hill.svg": {
-    "file": "assets/hill.27183a41.svg",
-    "src": "assets/img/superplumber/hill.svg"
-  },
   "assets/img/superplumber/coin-stack.svg": {
     "file": "assets/coin-stack.b51e8861.svg",
     "src": "assets/img/superplumber/coin-stack.svg"
   },
-  "assets/img/superplumber/brick-pattern.svg": {
-    "file": "assets/brick-pattern.7d3dd210.svg",
-    "src": "assets/img/superplumber/brick-pattern.svg"
-  },
-  "assets/img/superplumber/question-block.svg": {
-    "file": "assets/question-block.7c843269.svg",
-    "src": "assets/img/superplumber/question-block.svg"
+  "assets/img/superplumber/pipe.svg": {
+    "file": "assets/pipe.fa242f85.svg",
+    "src": "assets/img/superplumber/pipe.svg"
   },
   "assets/img/superplumber/controller.svg": {
     "file": "assets/controller.4ffd8342.svg",
@@ -27,13 +19,21 @@
     "file": "assets/cloud.49e6a367.svg",
     "src": "assets/img/superplumber/cloud.svg"
   },
+  "assets/img/superplumber/hill.svg": {
+    "file": "assets/hill.27183a41.svg",
+    "src": "assets/img/superplumber/hill.svg"
+  },
   "assets/webfonts/SUPERPLUMBER_Font_v3_Solid.otf": {
     "file": "assets/SUPERPLUMBER_Font_v3_Solid.a6f3fa36.otf",
     "src": "assets/webfonts/SUPERPLUMBER_Font_v3_Solid.otf"
   },
-  "assets/img/superplumber/pipe.svg": {
-    "file": "assets/pipe.fa242f85.svg",
-    "src": "assets/img/superplumber/pipe.svg"
+  "assets/img/superplumber/brick-pattern.svg": {
+    "file": "assets/brick-pattern.7d3dd210.svg",
+    "src": "assets/img/superplumber/brick-pattern.svg"
+  },
+  "assets/img/superplumber/question-block.svg": {
+    "file": "assets/question-block.7c843269.svg",
+    "src": "assets/img/superplumber/question-block.svg"
   },
   "assets/js/index.js": {
     "file": "assets/index.js",
