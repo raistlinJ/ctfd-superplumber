@@ -1,4 +1,4 @@
-import { Tooltip } from "bootstrap";
+import { Tooltip } from "./bootstrap";
 
 export default () => {
   const tooltipList = [].slice.call(

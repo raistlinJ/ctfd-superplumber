@@ -486,6 +486,7 @@
 {% endblock %}
 
 {% block scripts %}
+  {{ super() }}
   <script>
       window.stats_data = {{ {
         'type': 'team',

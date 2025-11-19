@@ -3,11 +3,28 @@ import CTFd from "./index";
 import { getOption } from "./utils/graphs/echarts/scoreboard";
 import { embed } from "./utils/graphs/echarts";
 
+const START_EVENTS_EVENT = "ctfd:start-events";
+
+if (typeof window !== "undefined") {
+  window.__CTFdDeferEvents = true;
+}
+
 window.Alpine = Alpine;
 window.CTFd = CTFd;
 
 // Default scoreboard polling interval to every 5 minutes
 const scoreboardUpdateInterval = window.scoreboardUpdateInterval || 300000;
+
+function signalEventStreamReady() {
+  if (typeof window === "undefined") {
+    return;
+  }
+  if (window.__CTFdEventsReady) {
+    return;
+  }
+  window.__CTFdEventsReady = true;
+  window.dispatchEvent(new CustomEvent(START_EVENTS_EVENT));
+}
 
 Alpine.data("ScoreboardDetail", () => ({
   data: {},
@@ -48,7 +65,11 @@ Alpine.data("ScoreboardList", () => ({
       this.$dispatch("bracket-change", value);
     });
 
-    this.update();
+    try {
+      await this.update();
+    } finally {
+      signalEventStreamReady();
+    }
 
     setInterval(() => {
       this.update();
@@ -56,4 +77,5 @@ Alpine.data("ScoreboardList", () => ({
   },
 }));
 
-Alpine.start();
+// The global Alpine instance is started by assets/js/page.js.
+// Avoid starting again here so ScoreboardDetail registers before the global init runs.

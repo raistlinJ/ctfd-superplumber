@@ -149,5 +149,6 @@
 {% endblock %}
 
 {% block scripts %}
+  {{ super() }}
   {{ Assets.js("assets/js/teams/list.js") }}
 {% endblock %}

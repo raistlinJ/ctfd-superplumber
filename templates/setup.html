@@ -381,8 +381,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
+	{{ super() }}
+	<script>
 	var STATE = {{ state | tojson }};
-</script>
-{{ Assets.js("assets/js/setup.js") }}
+	</script>
+	{{ Assets.js("assets/js/setup.js") }}
 {% endblock %}

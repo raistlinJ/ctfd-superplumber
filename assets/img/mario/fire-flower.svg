@@ -1,0 +1,24 @@
+<svg width="120" height="140" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fire Flower">
+  <defs>
+    <linearGradient id="petal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff176"/>
+      <stop offset="100%" stop-color="#ff8f00"/>
+    </linearGradient>
+    <linearGradient id="stem" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#66bb6a"/>
+      <stop offset="100%" stop-color="#2e7d32"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="60" cy="50" rx="48" ry="36" fill="url(#petal)" stroke="#f4511e" stroke-width="6"/>
+  <ellipse cx="60" cy="50" rx="26" ry="18" fill="#ffe082" stroke="#fdd835" stroke-width="4"/>
+  <circle cx="47" cy="50" r="8" fill="#1a237e"/>
+  <circle cx="73" cy="50" r="8" fill="#1a237e"/>
+  <rect x="54" y="68" width="12" height="26" fill="#8bc34a"/>
+  <path d="M40 94h40v8H40z" fill="#43a047"/>
+  <path d="M32 102h56v12H32z" fill="#388e3c"/>
+  <path d="M40 114h40v10H40z" fill="#2e7d32"/>
+  <path d="M45 124h30v10H45z" fill="#1b5e20"/>
+  <path d="M40 94c-8 0-14 10-14 22h12c0-6 3-12 8-12z" fill="#66bb6a"/>
+  <path d="M80 94c8 0 14 10 14 22H82c0-6-3-12-8-12z" fill="#66bb6a"/>
+  <rect x="52" y="90" width="16" height="12" fill="url(#stem)"/>
+</svg>

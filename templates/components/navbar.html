@@ -1,16 +1,21 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-md mario-nav fixed-top">
   <div class="container">
-    <a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand">
+    <a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand mario-brand d-flex align-items-center gap-3">
       {% if Configs.ctf_logo %}
         <img
             class="img-responsive ctf_logo"
             src="{{ url_for('views.files', path=Configs.ctf_logo) }}"
             alt="{{ Configs.ctf_name }}"
-            height="25"
+            height="36"
         >
-      {% else %}
-        {{ Configs.ctf_name }}
       {% endif %}
+      <div class="mario-brand-copy">
+        <span class="mario-brand-text">{{ Configs.ctf_name }}</span>
+        <small class="mario-brand-tagline text-uppercase">Warp Pipe Edition</small>
+        <span class="mario-brand-controller" aria-hidden="true">
+          <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/controller.svg') }}" alt="">
+        </span>
+      </div>
     </a>
 
     <button
@@ -206,6 +211,14 @@
           </button>
         </li>
       </ul>
+
+      {% if authed() %}
+        <div class="mario-hud d-none d-lg-flex">
+          <div class="mario-life-counter">
+            {{ (Team.name if Team else User.name) or _('Player') }}
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 </nav>

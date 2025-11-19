@@ -1,4 +1,4 @@
-import { Collapse } from "bootstrap";
+import { Collapse } from "./bootstrap";
 
 export default () => {
   const collapseList = [].slice.call(document.querySelectorAll(".collapse"));

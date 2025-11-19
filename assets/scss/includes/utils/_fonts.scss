@@ -1,11 +1,24 @@
-@use "~/@fontsource/lato/scss/mixins" as Lato;
-@use "~/@fontsource/raleway/scss/mixins" as Raleway;
+@font-face {
+  font-family: "Mario Solid";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../webfonts/MARIO_Font_v3_Solid.otf") format("opentype");
+}
 
-// Include both normal and bold weights
-@include Lato.fontFace($fontDir: "../webfonts", $weight: 400);
-@include Lato.fontFace($fontDir: "../webfonts", $weight: 700);
+@font-face {
+  font-family: "Mario Maker";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../webfonts/MARIOMAKER.otf") format("opentype");
+}
 
-@include Raleway.fontFace($fontDir: "../webfonts");
+:root {
+  --mario-font-body: "Mario Solid", "Mario Maker", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mario-font-retro: "Mario Maker", "Mario Solid", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bs-body-font-family: var(--mario-font-body);
+}
 
 $fa-font-path: "../webfonts";
 @import "~/@fortawesome/fontawesome-free/scss/fontawesome.scss";
@@ -15,9 +28,14 @@ $fa-font-path: "../webfonts";
 html,
 body,
 .container {
-  font-family: "Lato", sans-serif;
+  font-family: var(--mario-font-body);
 }
 
-.jumbotron .container {
-  font-family: "Raleway", sans-serif;
+h1,
+h2,
+h3,
+.navbar-brand,
+.mario-display {
+  font-family: var(--mario-font-retro);
+  letter-spacing: 0.08em;
 }

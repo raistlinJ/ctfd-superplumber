@@ -29,6 +29,7 @@
 {% endblock %}
 
 {% block scripts %}
-  {{ Assets.js("assets/js/notifications.js") }}
+	{{ super() }}
+	{{ Assets.js("assets/js/notifications.js") }}
 {% endblock %}
 

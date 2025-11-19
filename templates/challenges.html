@@ -1,120 +1,127 @@
 {% extends "base.html" %}
 
-{% block title %}Challenges - {{ super() }}{% endblock %}
-
 {% block content %}
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card mario-shadow">
-            <div class="card-header">
-                <h1>🏰 Challenges</h1>
-            </div>
-            <div class="card-body">
-                <p class="lead">Complete challenges to earn coins and climb the leaderboard!</p>
-                
-                <!-- Category Filter -->
-                <div class="btn-group mb-3" role="group">
-                    <button type="button" class="btn btn-primary active" data-filter="all">
-                        All Worlds
-                    </button>
-                    {% for category in categories %}
-                    <button type="button" class="btn btn-outline-primary" data-filter="{{ category }}">
-                        {{ category }}
-                    </button>
-                    {% endfor %}
-                </div>
-            </div>
+  <section class="container mario-hero">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <p class="mario-hero__badge">
+          {% trans %}World Map{% endtrans %}
+        </p>
+        <h1 class="mario-hero__title">{% trans %}Challenges{% endtrans %}</h1>
+        <p class="mario-hero__subtitle">
+          {% trans %}Smash question blocks, grab the hidden coins, and unlock every flag along the path to the castle.{% endtrans %}
+        </p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <div class="mario-world-pill">{% trans %}World{% endtrans %} 1-1</div>
         </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="mario-hero__art" aria-hidden="true">
+          <img class="mario-hero__asset mario-hero__asset--flag" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/flag.svg') }}" alt="">
+          <img class="mario-hero__asset mario-hero__asset--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" alt="">
+          <img class="mario-hero__asset mario-hero__asset--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
+          <img class="mario-hero__gif mario-hero__gif--runner" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-mario-run.gif') }}" alt="">
+          <img class="mario-hero__gif mario-hero__gif--coin" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-coin-spin.gif') }}" alt="">
+          <img class="mario-hero__gif mario-hero__gif--goomba" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-goomba.gif') }}" alt="">
+        </div>
+      </div>
     </div>
-</div>
+  </section>
 
-<!-- Challenge Grid -->
-<div class="row g-4" id="challenges-grid">
-    {% for challenge in challenges %}
-    <div class="col-md-6 col-lg-4 challenge-item" data-category="{{ challenge.category }}">
-        <div class="card challenge-card {% if challenge.solved_by_me %}challenge-solved{% endif %} h-100 mario-shadow">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="text-truncate">{{ challenge.name }}</span>
-                <span class="badge badge-warning">{{ challenge.value }} 🪙</span>
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="badge bg-mario-red">{{ challenge.category }}</span>
-                    <small class="text-muted">
-                        {% if challenge.solves %}
-                            {{ challenge.solves }} {% if challenge.solves == 1 %}solve{% else %}solves{% endif %}
-                        {% else %}
-                            No solves yet
-                        {% endif %}
-                    </small>
-                </div>
-                
-                {% if challenge.solved_by_me %}
-                <div class="alert alert-success py-2 mb-2">
-                    ✓ Solved!
-                </div>
-                {% endif %}
-                
-                <div class="challenge-tags mb-2">
-                    {% for tag in challenge.tags %}
-                    <span class="badge badge-info me-1">{{ tag }}</span>
-                    {% endfor %}
-                </div>
-                
-                <a href="{{ url_for('challenges.view', challenge_id=challenge.id) }}" 
-                   class="btn btn-primary w-100">
-                    {% if challenge.solved_by_me %}
-                        View Challenge
-                    {% else %}
-                        Start Challenge
-                    {% endif %}
-                </a>
-            </div>
-        </div>
-    </div>
+  <div class="container mario-star-strip" aria-hidden="true">
+    {% for _ in range(3) %}
+      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
     {% endfor %}
-</div>
+  </div>
 
-{% if not challenges %}
-<div class="row">
-    <div class="col-12">
-        <div class="card mario-shadow text-center">
-            <div class="card-body py-5">
-                <h3>🍄 No challenges available yet!</h3>
-                <p class="text-muted">Check back soon for new adventures!</p>
-            </div>
-        </div>
+  <div class="container mario-pipe-stack" aria-hidden="true">
+    {% set pipe_scales = [1, 1.25, 0.85, 1.15] %}
+    {% for scale in pipe_scales %}
+      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" style="--pipe-scale: {{ '%.2f' % scale }};" alt="">
+    {% endfor %}
+  </div>
+  <div class="mario-rainbow-divider" aria-hidden="true"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% include "components/errors.html" %}
+      </div>
     </div>
-</div>
-{% endif %}
+
+    <div 
+      x-data="ChallengeBoard" 
+      @load-challenges.window="loadChallenges()" 
+      @load-challenge.window="loadChallenge($event.detail)"
+    >
+      <div
+          x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data=""
+          x-html="$store.challenge.data.view"
+      ></div>
+
+      <div x-show="!loaded">
+        <div class="min-vh-50 d-flex align-items-center">
+          <div class="text-center w-100">
+            <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+          </div>
+        </div>
+      </div>
+
+      <div x-show="loaded">
+        <div class="mario-world-map">
+          <div class="mario-world-artifact mario-world-artifact--cloud">
+            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/cloud.svg') }}" alt="">
+          </div>
+          <div class="mario-world-artifact mario-world-artifact--hill">
+            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/hill.svg') }}" alt="">
+          </div>
+          <div class="mario-world-artifact mario-world-artifact--flower">
+            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/fire-flower.svg') }}" alt="">
+          </div>
+          <div class="mario-world-artifact mario-world-artifact--coin">
+            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-coin-spin.gif') }}" alt="">
+          </div>
+          <div class="mario-world-columns">
+            <template x-for="(category, idx) in getCategories()" :key="idx">
+              <section class="mario-world-column" :class="{'is-last': idx === getCategories().length - 1}">
+                <div class="mario-world-level">
+                  <span class="mario-world-level__badge" x-text="`World ${idx + 1}`"></span>
+                  <h3 x-text="category"></h3>
+                </div>
+                <div class="mario-world-pipe" aria-hidden="true">
+                  <span class="mario-world-pipe__top"></span>
+                  <span class="mario-world-pipe__stem"></span>
+                </div>
+                <div class="mario-world-stage">
+                  <div class="mario-world-stage__grid">
+                    <template x-for="(c, cidx) in getChallenges(category)" :key="c.id">
+                      <div class="mario-world-node">
+                        <button
+                            class="challenge-button btn btn-dark"
+                            :class="[
+                              c.solved_by_me ? 'challenge-solved' : '',
+                              ...c.tags.map((tag) => `tag-${tag.value.replace(/ /g, '-')}`),
+                            ];"
+                            :value="c.id" @click="loadChallenge(c.id)"
+                        >
+                          <div class="challenge-inner my-3">
+                            <p x-text="c.name"></p>
+                            <span x-text="c.value"></span>
+                          </div>
+                        </button>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </section>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block scripts %}
-{{ super() }}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Challenge filtering
-    const filterButtons = document.querySelectorAll('[data-filter]');
-    const challenges = document.querySelectorAll('.challenge-item');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const filter = this.dataset.filter;
-            
-            // Update active button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Filter challenges
-            challenges.forEach(challenge => {
-                if (filter === 'all' || challenge.dataset.category === filter) {
-                    challenge.style.display = '';
-                } else {
-                    challenge.style.display = 'none';
-                }
-            });
-        });
-    });
-});
-</script>
+  {{ Assets.js("assets/js/challenges.js") }}
+  {{ super() }}
 {% endblock %}

@@ -9,6 +9,17 @@
   }
 }
 
+body.mario-skin .modal-dialog {
+  max-width: min(1000px, calc(100vw - 2rem));
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  body.mario-skin .modal-dialog {
+    max-width: 1040px;
+  }
+}
+
 [data-bs-theme="light"] .challenge-button {
   border: none;
   box-shadow: 0 0 15px var(--bs-secondary);
@@ -37,4 +48,69 @@
       background-color: #37d63e;
     }
   }
+}
+
+.modal .alert {
+  border: none;
+  border-radius: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+[data-bs-theme="light"] .modal .alert {
+  color: var(--mario-text-soft);
+}
+
+[data-bs-theme="dark"] .modal .alert {
+  color: #fdfaf5;
+}
+
+[data-bs-theme="light"] .modal .alert-success {
+  --bs-alert-bg: #e6ffe8;
+  --bs-alert-border-color: rgba(13, 74, 34, 0.2);
+  --bs-alert-color: #0d4a22;
+}
+
+[data-bs-theme="light"] .modal .alert-info {
+  --bs-alert-bg: #e4f2ff;
+  --bs-alert-border-color: rgba(7, 63, 107, 0.18);
+  --bs-alert-color: #073f6b;
+}
+
+[data-bs-theme="light"] .modal .alert-warning {
+  --bs-alert-bg: #fff4dd;
+  --bs-alert-border-color: rgba(120, 69, 7, 0.22);
+  --bs-alert-color: #6d3c00;
+}
+
+[data-bs-theme="light"] .modal .alert-danger {
+  --bs-alert-bg: #ffe3ea;
+  --bs-alert-border-color: rgba(128, 20, 34, 0.2);
+  --bs-alert-color: #7a0d1d;
+}
+
+[data-bs-theme="dark"] .modal .alert-success {
+  --bs-alert-bg: rgba(23, 88, 53, 0.9);
+  --bs-alert-border-color: rgba(117, 235, 178, 0.35);
+  --bs-alert-color: #dcffe8;
+}
+
+[data-bs-theme="dark"] .modal .alert-info {
+  --bs-alert-bg: rgba(19, 52, 96, 0.9);
+  --bs-alert-border-color: rgba(158, 202, 255, 0.3);
+  --bs-alert-color: #e4f0ff;
+}
+
+[data-bs-theme="dark"] .modal .alert-warning {
+  --bs-alert-bg: rgba(96, 54, 12, 0.9);
+  --bs-alert-border-color: rgba(255, 214, 136, 0.35);
+  --bs-alert-color: #fff4d5;
+}
+
+[data-bs-theme="dark"] .modal .alert-danger {
+  --bs-alert-bg: rgba(110, 20, 27, 0.9);
+  --bs-alert-border-color: rgba(255, 168, 181, 0.35);
+  --bs-alert-color: #ffe8ec;
 }

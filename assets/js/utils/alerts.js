@@ -1,4 +1,4 @@
-import { Alert } from "bootstrap";
+import { Alert } from "./bootstrap";
 
 export default () => {
   const alertList = [].slice.call(document.querySelectorAll(".alert"));

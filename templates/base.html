@@ -1,113 +1,142 @@
+{% if ctf_logo is not defined %}
+  {% macro _fallback_ctf_logo() -%}
+    {%- if Configs.ctf_logo -%}
+      {{ url_for('views.files', path=Configs.ctf_logo) }}
+    {%- else -%}
+      {{ Configs.ctf_logo }}
+    {%- endif -%}
+  {%- endmacro %}
+  {% set ctf_logo = _fallback_ctf_logo %}
+{% endif %}
+
+{% if ctf_small_icon is not defined %}
+  {% macro _fallback_ctf_small_icon() -%}
+    {%- if Configs.ctf_small_icon -%}
+      {{ Configs.ctf_small_icon }}
+    {%- endif -%}
+  {%- endmacro %}
+  {% set ctf_small_icon = _fallback_ctf_small_icon %}
+{% endif %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <title>{% block title %}{{ Configs.ctf_name or 'CTF' }}{% endblock %}</title>
-    
-    {% block stylesheets %}
-        {{ Assets.css("main.css") }}
-    {% endblock %}
-    
-    <link rel="icon" href="{{ url_for('views.themes', path='img/favicon.ico') }}" type="image/x-icon">
-    
-    {% block meta %}{% endblock %}
+  <title>{{ title or Configs.ctf_name }}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{{ Configs.ctf_small_icon }}" type="image/x-icon">
+
+  {{ meta | safe }}
+
+  {% block stylesheets %}
+    {{ Assets.css("assets/scss/main.scss") }}
+  {% endblock %}
+
+  {{ Plugins.styles }}
+
+  {{ Assets.js("assets/js/color_mode_switcher.js", type=None) }}
+
+  <script type="text/javascript">
+      window.init = {
+          'urlRoot': "{{ request.script_root }}",
+          'csrfNonce': "{{ Session.nonce }}",
+          'userMode': "{{ Configs.user_mode }}",
+          'userId': {{ Session.id }},
+          'userName': {{ User.name | tojson }},
+          'userEmail': {{ User.email | tojson }},
+          'userVerified': {{ User.verified | tojson }},
+          'teamId': {{ Team.id | tojson }},
+          'teamName': {{ Team.name | tojson }},
+          'start': {{ Configs.start | tojson }},
+          'end': {{ Configs.end | tojson }},
+          'themeSettings': {{ Configs.theme_settings | tojson }},
+          'eventSounds': [
+            "/themes/core/static/sounds/notification.webm",
+            "/themes/core/static/sounds/notification.mp3",
+          ],
+      }
+  </script>
+
+  {{ Configs.theme_header }}
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('views.static_html', route='/' ) }}">
-                🍄 {{ Configs.ctf_name or 'CTF' }}
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    {% if authed() %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('challenges.listing') }}">
-                                🏰 Challenges
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('scoreboard.listing') }}">
-                                🏆 Scoreboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('teams.listing') }}">
-                                👥 Teams
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link score-display" href="{{ url_for('users.private') }}">
-                                <span data-score="{{ score() }}">{{ score() }}</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.logout') }}">
-                                🚪 Logout
-                            </a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.register') }}">
-                                ⭐ Register
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.login') }}">
-                                🔑 Login
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body class="mario-skin">
+{% include "components/navbar.html" %}
 
-    <!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="container mt-3">
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
+{% if authed() %}
+  {% if Configs.user_mode == "teams" and Team %}
+    {% set _mario_score = (Team.score or 0)|int %}
+    {% set _mario_solve_count = (Team.solves | default([], true) | length) %}
+    {% set _mario_rank = (Team.place or 0)|int %}
+  {% else %}
+    {% set _mario_score = (User.score or 0)|int %}
+    {% set _mario_solve_count = (User.solves | default([], true) | length) %}
+    {% set _mario_rank = (User.place or 0)|int %}
+  {% endif %}
+{% else %}
+  {% set _mario_score = 0 %}
+  {% set _mario_solve_count = 0 %}
+  {% set _mario_rank = 0 %}
+{% endif %}
+{% set _mario_star_count = 0 %}
+<div class="mario-status-bar" aria-label="{% trans %}Mario status display{% endtrans %}">
+  <div class="container">
+    <div class="mario-status-inner">
+      <div class="mario-status-cell">
+        <span class="mario-status-label">{% trans %}World{% endtrans %}</span>
+        <span class="mario-status-value">CTF</span>
+      </div>
+      <div class="mario-status-cell">
+        <span class="mario-status-label">{% trans %}Score{% endtrans %}</span>
+        <span class="mario-status-value js-mario-score" data-mario-score="{{ _mario_score }}">{{ "%06d"|format(_mario_score) }}</span>
+      </div>
+      <div class="mario-status-cell">
+        <span class="mario-status-label">{% trans %}Lives{% endtrans %}</span>
+        <span class="mario-status-value mario-status-value--lives" aria-label="{% trans %}Infinite lives{% endtrans %}">
+          <span class="visually-hidden">&infin;</span>
+        </span>
+      </div>
+      <div class="mario-status-cell">
+        <span class="mario-status-label">{% trans %}Rank{% endtrans %}</span>
+        <span class="mario-status-value mario-status-value--rank js-mario-rank" data-mario-rank="{{ _mario_rank }}">{{ "#%03d"|format(_mario_rank) }}</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Main Content -->
-    <main class="container my-5">
-        {% block content %}{% endblock %}
-    </main>
+<div class="mario-scenery" aria-hidden="true">
+  <div class="mario-clouds"></div>
+  <div class="mario-hills"></div>
+  <div class="mario-ground">
+    <span class="mario-question mario-question--left"></span>
+    <span class="mario-question mario-question--right"></span>
+  </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3">
-        <div class="container text-center">
-            <p>
-                🎮 Powered by <a href="https://ctfd.io" target="_blank" class="text-decoration-none fw-bold">CTFd</a> 
-                | Super Mario Theme v1.0
-            </p>
-            <p class="small">
-                {% if ctf_logo() %}
-                    <img src="{{ url_for('views.files', path=ctf_logo()) }}" alt="CTF Logo" style="max-height: 40px;">
-                {% endif %}
-            </p>
-        </div>
-    </footer>
+<main role="main" class="mario-stage">
+  {% block content %}
+  {% endblock %}
+</main>
 
-    {% block scripts %}
-        {{ Assets.js("main.js") }}
-    {% endblock %}
+{% include "components/snackbar.html" %}
+
+<footer class="footer">
+  <div class="container text-center">
+    <a href="https://ctfd.io" class="text-secondary">
+      <small class="text-muted">
+        {% trans %}Powered by CTFd{% endtrans %}
+      </small>
+    </a>
+  </div>
+</footer>
+
+{% include "components/notifications.html" %}
+
+{% block scripts %}
+  {{ Assets.js("assets/js/page.js") }}
+{% endblock %}
+
+{{ Plugins.scripts }}
+
+{{ Configs.theme_footer }}
 </body>
 </html>

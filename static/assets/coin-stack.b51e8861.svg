@@ -1,0 +1,25 @@
+<svg width="60" height="90" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coin stack">
+  <defs>
+    <linearGradient id="coin-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe066"/>
+      <stop offset="100%" stop-color="#f5a623"/>
+    </linearGradient>
+    <linearGradient id="coin-shadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f9b233"/>
+      <stop offset="100%" stop-color="#c77400"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10,10)">
+    <ellipse cx="20" cy="60" rx="20" ry="8" fill="#b57615" opacity="0.4"/>
+    <g>
+      <rect x="2" y="0" width="36" height="52" rx="6" fill="url(#coin-gold)" stroke="#c77400" stroke-width="4"/>
+      <rect x="6" y="6" width="28" height="40" rx="4" fill="url(#coin-shadow)"/>
+      <circle cx="20" cy="26" r="10" fill="none" stroke="#ffe066" stroke-width="4"/>
+    </g>
+    <g transform="translate(0,20)">
+      <rect x="2" y="0" width="36" height="52" rx="6" fill="url(#coin-gold)" stroke="#c77400" stroke-width="4"/>
+      <rect x="6" y="6" width="28" height="40" rx="4" fill="url(#coin-shadow)"/>
+      <circle cx="20" cy="26" r="10" fill="none" stroke="#ffe066" stroke-width="4"/>
+    </g>
+  </g>
+</svg>

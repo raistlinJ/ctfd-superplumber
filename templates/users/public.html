@@ -219,6 +219,7 @@
 {% endblock %}
 
 {% block scripts %}
+  {{ super() }}
   <script>
       window.USER = {{ {
       'type': 'user',

@@ -1,4 +1,4 @@
-<div :class="getStyles()" role="document" x-data="Challenge" x-init='id = {{ challenge.id }}; max_attempts = {{ max_attempts }}; attempts = {{ attempts }}; ratingValue = {{ (rating.get('value') if rating else None) | tojson }}; ratingReview = {{ (rating.get('review', '') if rating else None) | tojson }};'>
+<div class="modal-dialog" :class="getStyles()" role="document" x-data="Challenge" x-init='id = {{ challenge.id }}; max_attempts = {{ max_attempts }}; attempts = {{ attempts }}; ratingValue = {{ (rating.get('value') if rating else None) | tojson }}; ratingReview = {{ (rating.get('review', '') if rating else None) | tojson }};'>
   <div class="modal-content">
     <div class="modal-body py-4 px-4 px-sm-5">
 
@@ -200,8 +200,8 @@
                       :class="{
                         'alert-success': response.data.status == 'correct',
                         'alert-info': response.data.status == 'already_solved',
-                        'alert-danger': response.data.status == 'incorrect',
-                        'alert-warning': response.data.status == 'paused',
+                        'alert-danger': response.data.status == 'incorrect' || response.data.status == 'error',
+                        'alert-warning': response.data.status == 'paused' || response.data.status == 'login_required',
                       }" role="alert"
                   >
                     <strong x-text="response.data.message"></strong>

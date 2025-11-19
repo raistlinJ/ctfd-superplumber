@@ -1,70 +1,86 @@
 {% extends "base.html" %}
 
-{% block title %}Login - {{ super() }}{% endblock %}
-
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
-        <div class="card mario-shadow">
-            <div class="card-header text-center">
-                <h1>🔑 Login</h1>
-            </div>
-            <div class="card-body p-4">
-                <form method="POST" action="{{ url_for('auth.login') }}">
-                    {{ form.csrf_token }}
-                    
-                    <div class="mb-3">
-                        <label for="name" class="form-label fw-bold">
-                            👤 Username or Email
-                        </label>
-                        {{ form.name(class="form-control", placeholder="Enter your username") }}
-                        {% if form.name.errors %}
-                            <div class="text-danger mt-1">
-                                {% for error in form.name.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="password" class="form-label fw-bold">
-                            🔒 Password
-                        </label>
-                        {{ form.password(class="form-control", placeholder="Enter your password") }}
-                        {% if form.password.errors %}
-                            <div class="text-danger mt-1">
-                                {% for error in form.password.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    </div>
-                    
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary w-100">
-                            🚀 Start Adventure
-                        </button>
-                    </div>
-                </form>
-                
-                <hr>
-                
-                <div class="text-center">
-                    <p class="mb-2">
-                        <a href="{{ url_for('auth.reset_password') }}" class="text-decoration-none">
-                            🔧 Forgot Password?
-                        </a>
-                    </p>
-                    <p class="mb-0">
-                        Don't have an account? 
-                        <a href="{{ url_for('auth.register') }}" class="text-decoration-none fw-bold">
-                            ⭐ Register here
-                        </a>
-                    </p>
-                </div>
-            </div>
+  <section class="container mario-hero mario-hero--compact">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <p class="mario-hero__badge">{% trans %}Player Select{% endtrans %}</p>
+        <h1 class="mario-hero__title">{% trans %}Log In{% endtrans %}</h1>
+        <p class="mario-hero__subtitle">
+          {% trans %}Slide down the warp pipe, punch in your credentials, and hop back into the action.{% endtrans %}
+        </p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <div class="mario-world-pill">{% trans %}1-UP Ready{% endtrans %}</div>
+          <div class="mario-world-pill">{% trans %}Continue{% endtrans %}</div>
         </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="mario-hero__art" aria-hidden="true">
+          <img class="mario-hero__asset mario-hero__asset--flag" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/flag.svg') }}" alt="">
+          <img class="mario-hero__asset mario-hero__asset--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" alt="">
+          <img class="mario-hero__asset mario-hero__asset--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
+        </div>
+      </div>
     </div>
-</div>
+  </section>
+
+  <div class="container mario-auth-shell">
+    <div class="row g-5 align-items-center justify-content-center">
+      <div class="col-lg-5 col-xl-4">
+        <div class="mario-auth-card">
+          <h2 class="mario-retro text-center mb-4">{% trans %}Player Login{% endtrans %}</h2>
+          {% include "components/errors.html" %}
+
+          {% if integrations.mlc() %}
+            <a class="btn btn-secondary btn-lg w-100 mb-4" href="{{ url_for('auth.oauth_login') }}">
+              {% trans %}Login with Major League Cyber{% endtrans %}
+            </a>
+          {% endif %}
+
+          {% with form = Forms.auth.LoginForm() %}
+            <form method="post" accept-charset="utf-8">
+              <div class="mb-3">
+                <b>{{ form.name.label(class="form-label") }}</b>
+                {{ form.name(class="form-control", value=name, autocomplete="username email") }}
+              </div>
+
+              <div class="mb-3">
+                <b>{{ form.password.label(class="form-label") }}</b>
+                {{ form.password(class="form-control", value=password, autocomplete="current-password") }}
+              </div>
+
+              <div class="row pt-3 align-items-center gy-3">
+                <div class="col-md-7">
+                  <a class="align-middle" href="{{ url_for('auth.reset_password') }}">
+                    {% trans %}Forgot your password?{% endtrans %}
+                  </a>
+                </div>
+
+                <div class="col-md-5">
+                  {{ form.submit(class="btn btn-primary w-100") }}
+                </div>
+              </div>
+
+              {{ form.nonce() }}
+            </form>
+          {% endwith %}
+
+          {% if registration_visible() %}
+            <div class="mario-auth-cta mt-4">
+              {% trans %}Need an account?{% endtrans %}
+              <a href="{{ url_for('auth.register') }}">{% trans %}Register{% endtrans %}</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-xl-4">
+        <div class="mario-auth-illustration" aria-hidden="true">
+          <img class="mario-auth-illustration__sprite mario-auth-illustration__sprite--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" alt="">
+          <img class="mario-auth-illustration__sprite mario-auth-illustration__sprite--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
+          <img class="mario-auth-illustration__sprite mario-auth-illustration__sprite--flower" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/fire-flower.svg') }}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

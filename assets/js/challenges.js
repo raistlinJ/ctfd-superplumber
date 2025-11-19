@@ -3,17 +3,75 @@ import dayjs from "dayjs";
 
 import CTFd from "./index";
 
-import { Modal, Tab, Tooltip } from "bootstrap";
+import { Modal, Tab, Tooltip } from "./utils/bootstrap";
 import highlight from "./theme/highlight";
 
-function addTargetBlank(html) {
-  let dom = new DOMParser();
-  let view = dom.parseFromString(html, "text/html");
-  let links = view.querySelectorAll('a[href*="://"]');
+const sortFailures = {
+  challenge_category_order: false,
+  challenge_order: false,
+};
+
+function applyCustomSort(list, { settingKey, label }) {
+  if (!Array.isArray(list) || sortFailures[settingKey]) {
+    return list;
+  }
+
+  const settings = CTFd?.config?.themeSettings;
+  const rawComparator = settings?.[settingKey];
+  if (!rawComparator) {
+    return list;
+  }
+
+  let comparator;
+  try {
+    comparator = new Function(`return (${rawComparator})`)();
+  } catch (error) {
+    sortFailures[settingKey] = true;
+    console.warn(
+      `[Mario Theme] Failed to parse ${label} sort function from theme setting "${settingKey}".`,
+      error,
+    );
+    return list;
+  }
+
+  if (typeof comparator !== "function") {
+    sortFailures[settingKey] = true;
+    console.warn(
+      `[Mario Theme] Theme setting "${settingKey}" must evaluate to a function but returned`,
+      comparator,
+    );
+    return list;
+  }
+
+  try {
+    list.sort(comparator);
+  } catch (error) {
+    sortFailures[settingKey] = true;
+    console.warn(
+      `[Mario Theme] Theme setting "${settingKey}" threw while sorting ${label}s.`,
+      error,
+    );
+  }
+
+  return list;
+}
+
+function decorateExternalLinks(root) {
+  if (!root) {
+    return;
+  }
+  const links = root.querySelectorAll('a[href*="://"]');
   links.forEach(link => {
     link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
   });
-  return view.documentElement.outerHTML;
+}
+
+function addTargetBlank(html) {
+  const template = document.createElement("template");
+  template.innerHTML = html;
+  decorateExternalLinks(template.content || template);
+  return template.innerHTML;
 }
 
 window.Alpine = Alpine;
@@ -89,7 +147,8 @@ Alpine.data("Challenge", () => ({
       "modal-dialog": true,
     };
     try {
-      let size = CTFd.config.themeSettings.challenge_window_size;
+      const size =
+        CTFd.config?.themeSettings?.challenge_window_size || "xl";
       switch (size) {
         case "sm":
           styles["modal-sm"] = true;
@@ -98,15 +157,15 @@ Alpine.data("Challenge", () => ({
           styles["modal-lg"] = true;
           break;
         case "xl":
-          styles["modal-xl"] = true;
-          break;
         default:
+          styles["modal-xl"] = true;
           break;
       }
     } catch (error) {
       // Ignore errors with challenge window size
       console.log("Error processing challenge_window_size");
       console.log(error);
+      styles["modal-xl"] = true;
     }
     return styles;
   },
@@ -158,7 +217,11 @@ Alpine.data("Challenge", () => ({
   },
 
   async nextChallenge() {
-    let modal = Modal.getOrCreateInstance("[x-ref='challengeWindow']");
+    const modalRoot = document.querySelector("[x-ref='challengeWindow']");
+    if (!modalRoot) {
+      return;
+    }
+    let modal = Modal.getOrCreateInstance(modalRoot);
 
     // TODO: Get rid of this private attribute access
     // See https://github.com/twbs/bootstrap/issues/31266
@@ -201,30 +264,91 @@ Alpine.data("Challenge", () => ({
   },
 
   async submitChallenge() {
-    this.response = await CTFd.pages.challenge.submitChallenge(
-      this.id,
-      this.submission,
-    );
+    const isAuthenticated =
+      CTFd?.user?.id !== null && CTFd?.user?.id !== undefined;
+
+    if (!isAuthenticated) {
+      this.response = {
+        data: {
+          status: "login_required",
+          message: "Please log in to submit flags.",
+        },
+      };
+      await this.renderSubmissionResponse();
+      return;
+    }
+
+    try {
+      const rawResponse = await CTFd.pages.challenge.submitChallenge(
+        this.id,
+        this.submission,
+      );
+      this.response = this.normalizeSubmissionResponse(rawResponse);
+    } catch (error) {
+      console.error("Challenge submission failed", error);
+      this.response = {
+        data: {
+          status: "error",
+          message:
+            (error?.response?.data?.message) ||
+            error?.message ||
+            "Something went wrong. Please try again.",
+        },
+      };
+    }
 
     await this.renderSubmissionResponse();
   },
 
   async renderSubmissionResponse() {
-    if (this.response.data.status === "correct") {
+    const payload = this.response?.data;
+    if (!payload) {
+      return;
+    }
+
+    if (payload.status === "correct") {
       this.submission = "";
     }
 
     // Increment attempts counter
     if (
       this.max_attempts > 0 &&
-      this.response.data.status != "already_solved" &&
-      this.response.data.status != "ratelimited"
+      payload.status != "already_solved" &&
+      payload.status != "ratelimited"
     ) {
       this.attempts += 1;
     }
 
     // Dispatch load-challenges event to call loadChallenges in the ChallengeBoard
     this.$dispatch("load-challenges");
+  },
+
+  normalizeSubmissionResponse(rawResponse) {
+    if (!rawResponse || typeof rawResponse !== "object") {
+      return {
+        data: {
+          status: "error",
+          message: "No response received.",
+        },
+      };
+    }
+
+    const fallbackStatus = rawResponse.success ? "correct" : "incorrect";
+    const payload =
+      rawResponse.data && typeof rawResponse.data === "object"
+        ? rawResponse.data
+        : {};
+
+    return {
+      ...rawResponse,
+      data: {
+        status: payload.status || fallbackStatus,
+        message:
+          payload.message ||
+          rawResponse.message ||
+          (rawResponse.success ? "Challenge solved!" : "Submission received."),
+      },
+    };
   },
 
   async submitRating() {
@@ -246,10 +370,14 @@ Alpine.data("ChallengeBoard", () => ({
   loaded: false,
   challenges: [],
   challenge: null,
+  scrollCueCleanup: null,
 
   async init() {
     this.challenges = await CTFd.pages.challenges.getChallenges();
     this.loaded = true;
+    this.$nextTick(() => {
+      this.setupScrollHint();
+    });
 
     if (window.location.hash) {
       let chalHash = decodeURIComponent(window.location.hash.substring(1));
@@ -273,17 +401,10 @@ Alpine.data("ChallengeBoard", () => ({
       }
     });
 
-    try {
-      const f = CTFd.config.themeSettings.challenge_category_order;
-      if (f) {
-        const getSort = new Function(`return (${f})`);
-        categories.sort(getSort());
-      }
-    } catch (error) {
-      // Ignore errors with theme category sorting
-      console.log("Error running challenge_category_order function");
-      console.log(error);
-    }
+    applyCustomSort(categories, {
+      settingKey: "challenge_category_order",
+      label: "challenge category",
+    });
 
     return categories;
   },
@@ -295,48 +416,121 @@ Alpine.data("ChallengeBoard", () => ({
       challenges = this.challenges.filter(challenge => challenge.category === category);
     }
 
-    try {
-      const f = CTFd.config.themeSettings.challenge_order;
-      if (f) {
-        const getSort = new Function(`return (${f})`);
-        challenges.sort(getSort());
-      }
-    } catch (error) {
-      // Ignore errors with theme challenge sorting
-      console.log("Error running challenge_order function");
-      console.log(error);
-    }
+    applyCustomSort(challenges, {
+      settingKey: "challenge_order",
+      label: "challenge",
+    });
 
     return challenges;
   },
 
   async loadChallenges() {
     this.challenges = await CTFd.pages.challenges.getChallenges();
+    this.$nextTick(() => {
+      this.setupScrollHint();
+    });
   },
 
   async loadChallenge(challengeId) {
     await CTFd.pages.challenge.displayChallenge(challengeId, challenge => {
-      challenge.data.view = addTargetBlank(challenge.data.view);
-      Alpine.store("challenge").data = challenge.data;
+      const challengeStore = Alpine.store("challenge");
+      challengeStore.data = { ...challenge.data, view: "" };
 
-      // nextTick is required here because we're working in a callback
+      // Ensure Alpine flushes the new reactive object before injecting the view markup
       Alpine.nextTick(() => {
-        let modal = Modal.getOrCreateInstance("[x-ref='challengeWindow']");
-        // TODO: Get rid of this private attribute access
-        // See https://github.com/twbs/bootstrap/issues/31266
-        modal._element.addEventListener(
-          "hidden.bs.modal",
-          event => {
-            // Remove location hash
-            history.replaceState(null, null, " ");
-          },
-          { once: true },
-        );
-        modal.show();
-        history.replaceState(null, null, `#${challenge.data.name}-${challengeId}`);
+        challengeStore.data.view = challenge.data.view;
+
+        // Wait for Alpine to render the incoming HTML before touching the Bootstrap instance
+        Alpine.nextTick(async () => {
+          const modalRoot = this.$refs?.challengeWindow || document.querySelector("[x-ref='challengeWindow']");
+          if (!modalRoot) {
+            return;
+          }
+
+          const waitForDialog = () =>
+            new Promise(resolve => {
+              const check = remaining => {
+                if (modalRoot.querySelector(".modal-dialog")) {
+                  resolve();
+                  return;
+                }
+                if (remaining <= 0) {
+                  console.warn("Bootstrap modal dialog markup not found yet; skipping show()");
+                  resolve();
+                  return;
+                }
+                requestAnimationFrame(() => check(remaining - 1));
+              };
+              check(10);
+            });
+
+          await waitForDialog();
+
+          const existingInstance = Modal.getInstance(modalRoot);
+          if (existingInstance) {
+            existingInstance.dispose();
+          }
+          const modal = new Modal(modalRoot);
+          // TODO: Get rid of this private attribute access
+          // See https://github.com/twbs/bootstrap/issues/31266
+          modal._element.addEventListener(
+            "hidden.bs.modal",
+            () => {
+              // Remove location hash
+              history.replaceState(null, null, " ");
+            },
+            { once: true },
+          );
+
+          decorateExternalLinks(modal._element);
+          modal.show();
+          history.replaceState(null, null, `#${challenge.data.name}-${challengeId}`);
+        });
       });
     });
   },
+
+  setupScrollHint() {
+    if (this.scrollCueCleanup) {
+      this.scrollCueCleanup();
+      this.scrollCueCleanup = null;
+    }
+
+    const worldColumns = document.querySelector(".mario-world-columns");
+    if (!worldColumns) {
+      return;
+    }
+
+    const toggleCue = () => {
+      const totalScrollable = worldColumns.scrollWidth - worldColumns.clientWidth;
+      const hasOverflow = totalScrollable > 8;
+      if (!hasOverflow) {
+        worldColumns.classList.remove("has-scroll");
+        return;
+      }
+
+      const nearRightEdge =
+        worldColumns.scrollLeft + worldColumns.clientWidth >=
+        worldColumns.scrollWidth - 16;
+      worldColumns.classList.toggle("has-scroll", !nearRightEdge);
+    };
+
+    const handleScroll = () => {
+      toggleCue();
+    };
+
+    worldColumns.addEventListener("scroll", handleScroll, { passive: true });
+
+    const resizeObserver = new ResizeObserver(() => toggleCue());
+    resizeObserver.observe(worldColumns);
+
+    this.scrollCueCleanup = () => {
+      worldColumns.removeEventListener("scroll", handleScroll);
+      resizeObserver.disconnect();
+    };
+
+    toggleCue();
+  },
 }));
 
-Alpine.start();
+// Alpine is started globally in assets/js/page.js; the challenge bundle only registers stores/components.

@@ -218,6 +218,7 @@
 {% endblock %}
 
 {% block scripts %}
+  {{ super() }}
   {{ Assets.js("assets/js/users/private.js") }}
 {% endblock %}
 

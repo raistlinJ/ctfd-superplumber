@@ -1,106 +1,73 @@
-# Super Mario CTFd Theme
+# Warp Pipe CTF Theme
 
-A Super Mario Bros themed CTFd theme based on the core-beta theme, featuring retro pixel art aesthetics, iconic Mario elements, and a playful gaming experience.
+Warp Pipe is a Super Mario–inspired reskin of the official CTFd core theme. It keeps the Bootstrap 5 + Alpine.js foundation but swaps in chunky pixel fonts, glowing gradients, floating coins, and parallax scenery so your scoreboard feels like it lives inside World 1-1. All art assets here are original vectors created specifically for this project.
 
-## Features
+## Feature Highlights
 
-- 🍄 Classic Super Mario Bros visual style with pixel art elements
-- 🪙 Coin-based scoring indicators
-- 🏰 Castle and pipe-themed challenge categories
-- 🎮 Retro 8-bit inspired color scheme
-- ⭐ Mario-themed icons and graphics
-- 🎵 Nostalgic gaming aesthetics
+- **Fresh palette & typography** – Nintendo's Mario Maker font family everywhere, plus updated buttons, cards, and nav pills.
+- **Layered skyline** – animated clouds, hills, brick floors, and question blocks that respect `prefers-reduced-motion`.
+- **Question-block challenges** – hover lift, solved green glow, and soft shadows keep the board playful without sacrificing usability.
+- **Floating coins** – micro-animation powered by `assets/js/theme/mario.js` for extra whimsy (easy to disable).
+- **Warp-ready scoreboard** – pill headers, neon badges, and softened tables align with the Mario look while staying readable.
 
-## Installation
+## Quick Start
 
-1. Clone or download this theme to your CTFd themes directory:
-   ```bash
-   cd CTFd/themes/
-   git clone <your-repo> mario-theme
-   ```
-
-2. Install dependencies:
-   ```bash
-   cd mario-theme
-   npm install
-   ```
-
-3. Build the theme (this also generates the `static/manifest.json` file expected by CTFd):
-   ```bash
-   npm run build
-   ```
-
-4. In CTFd admin panel:
-   - Navigate to Config → Theme
-   - Select "mario-theme" from the dropdown
-   - Save changes
-
-## Development
-
-To develop the theme with automatic rebuilds:
+Clone the theme next to your CTFd install or develop it standalone:
 
 ```bash
-npm run dev
+git clone https://github.com/CTFd/core-beta.git warp-pipe-theme
+cd warp-pipe-theme
 ```
 
-This will watch for changes in the `assets/` directory and automatically rebuild.
-
-## Theme Structure
-
-```
-mario-theme/
-├── assets/              # Source files (edit these)
-│   ├── css/
-│   │   └── main.scss   # Main stylesheet with Mario theming
-│   └── js/
-│       └── main.js     # JavaScript functionality
-├── static/             # Compiled files (auto-generated)
-│   └── assets/
-├── templates/          # Jinja2 templates
-│   ├── base.html
-│   ├── page.html
-│   └── ...
-├── package.json
-├── vite.config.js
-└── theme.toml         # Theme metadata
-```
-
-## Customization
-
-### Colors
-The main colors are defined in `assets/css/main.scss`:
-- Primary (Mario Red): `#E52521`
-- Secondary (Mushroom): `#F0AF20`
-- Success (Luigi Green): `#00A651`
-- Info (Sky Blue): `#049CD8`
-- Blocks (Brown): `#8B4513`
-
-### Images
-Place custom Mario-themed images in `assets/images/` and reference them in your CSS or templates.
-
-### Fonts
-The theme uses a pixel-art style font for headers. You can customize this in the CSS file.
-
-## Building for Production
-
-When ready to deploy:
+Install dependencies (Yarn 1.x or modern npm-compatible Yarn works fine):
 
 ```bash
-npm run build
+yarn install
 ```
 
-Then zip the theme folder (excluding `node_modules/`) and upload to your CTFd instance.
+During development run the watch build so Vite recompiles on save:
 
-## Troubleshooting
+```bash
+yarn dev
+```
 
-- **500 error when loading the theme**: Ensure `static/manifest.json` exists. Run `npm run build` after pulling changes or editing assets so the manifest maps `main.css`/`main.js` to their hashed files.
+Create a production build before packaging or syncing into `CTFd/themes`:
 
-## Credits
+```bash
+yarn build
+```
 
-- Based on CTFd core-beta theme
-- Super Mario Bros is a trademark of Nintendo
-- This is a fan-made theme for educational purposes
+Copy the resulting directory (excluding `node_modules`) into `CTFd/themes/warp-pipe` and select it inside the CTFd admin UI.
 
-## License
+## Customization Pointers
 
-MIT License - See LICENSE file for details
+| Area | Files to tweak |
+| --- | --- |
+| Colors, gradients, parallax layers | `assets/scss/main.scss` |
+| Fonts & icon faces | `assets/scss/includes/utils/_fonts.scss` |
+| Mario artwork (clouds, bricks, coins…) | `assets/img/mario/` |
+| Floating coins / particle logic | `assets/js/theme/mario.js` (imported by `assets/js/page.js`) |
+| Layout wrappers & navbar markup | `templates/base.html`, `templates/components/navbar.html` |
+
+The background animation automatically disables when visitors opt into reduced motion. Remove the `import "./theme/mario";` line from `assets/js/page.js` if you prefer a static scene.
+
+## Available Scripts
+
+| Script | Description |
+| --- | --- |
+| `yarn dev` | Runs `vite build --watch` for iterative development |
+| `yarn build` | Produces an optimized build in `static/` |
+| `yarn format` | Applies Prettier to everything under `assets/` |
+| `yarn lint` | Checks formatting without modifying files |
+| `yarn verify` | Production build + git diff cleanliness check |
+| `yarn fetch:mario-font` | Downloads the proprietary Mario font binaries into `assets/webfonts/` (auto-runs before dev/build) |
+
+## Directory Layout
+
+```
+assets/    -> authoring sources (SCSS, JS, images, sounds)
+static/    -> compiled output served by CTFd
+templates/ -> Jinja templates for each CTFd page
+```
+
+Have fun storming the castle! 🎮

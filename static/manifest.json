@@ -1,121 +1,213 @@
 {
-  "main.css": {
-    "file": "assets/main.DhQtLFUV.css"
+  "assets/img/mario/coin.svg": {
+    "file": "assets/coin.5eb58d7d.svg",
+    "src": "assets/img/mario/coin.svg"
   },
-  "assets/js/main.js": {
-    "file": "assets/main.B7v1Rheq.js",
+  "assets/img/mario/star.svg": {
+    "file": "assets/star.9c945d4c.svg",
+    "src": "assets/img/mario/star.svg"
+  },
+  "assets/img/mario/mushroom.svg": {
+    "file": "assets/mushroom.44406eb8.svg",
+    "src": "assets/img/mario/mushroom.svg"
+  },
+  "assets/img/mario/fire-flower.svg": {
+    "file": "assets/fire-flower.b4c5af98.svg",
+    "src": "assets/img/mario/fire-flower.svg"
+  },
+  "assets/img/mario/pipe.svg": {
+    "file": "assets/pipe.fa242f85.svg",
+    "src": "assets/img/mario/pipe.svg"
+  },
+  "assets/img/mario/controller.svg": {
+    "file": "assets/controller.4ffd8342.svg",
+    "src": "assets/img/mario/controller.svg"
+  },
+  "assets/img/mario/coin-stack.svg": {
+    "file": "assets/coin-stack.b51e8861.svg",
+    "src": "assets/img/mario/coin-stack.svg"
+  },
+  "assets/webfonts/MARIOMAKER.otf": {
+    "file": "assets/MARIOMAKER.0eea61f6.otf",
+    "src": "assets/webfonts/MARIOMAKER.otf"
+  },
+  "assets/webfonts/MARIO_Font_v3_Solid.otf": {
+    "file": "assets/MARIO_Font_v3_Solid.a6f3fa36.otf",
+    "src": "assets/webfonts/MARIO_Font_v3_Solid.otf"
+  },
+  "assets/img/mario/hill.svg": {
+    "file": "assets/hill.27183a41.svg",
+    "src": "assets/img/mario/hill.svg"
+  },
+  "assets/img/mario/cloud.svg": {
+    "file": "assets/cloud.49e6a367.svg",
+    "src": "assets/img/mario/cloud.svg"
+  },
+  "assets/img/mario/brick-pattern.svg": {
+    "file": "assets/brick-pattern.7d3dd210.svg",
+    "src": "assets/img/mario/brick-pattern.svg"
+  },
+  "assets/img/mario/question-block.svg": {
+    "file": "assets/question-block.7c843269.svg",
+    "src": "assets/img/mario/question-block.svg"
+  },
+  "assets/img/mario/infinity.svg": {
+    "file": "assets/infinity.1ca86296.svg",
+    "src": "assets/img/mario/infinity.svg"
+  },
+  "assets/js/index.js": {
+    "file": "assets/index.js",
+    "src": "assets/js/index.js",
+    "isEntry": true
+  },
+  "assets/js/page.js": {
+    "file": "assets/page.js",
+    "src": "assets/js/page.js",
     "isEntry": true,
     "imports": [
-      "assets/relativeTime.GKSnQAGw.js"
+      "assets/js/index.js"
     ],
-    "css": [
-      "assets/main.DhQtLFUV.css"
-    ]
-  },
-  "main.js": {
-    "file": "assets/main.B7v1Rheq.js",
-    "isEntry": true,
-    "imports": [
-      "assets/relativeTime.GKSnQAGw.js"
-    ],
-    "css": [
-      "assets/main.DhQtLFUV.css"
-    ]
-  },
-  "assets/js/notifications.js": {
-    "file": "assets/notifications.ti1iw9ol.js",
-    "isEntry": true,
-    "imports": [
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.BhDPMm3o.js"
-    ]
-  },
-  "assets/js/settings.js": {
-    "file": "assets/settings.-0vE22yy.js",
-    "isEntry": true,
-    "imports": [
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.BhDPMm3o.js",
-      "assets/clipboard.CfWndw0T.js"
+    "assets": [
+      "assets/coin.5eb58d7d.svg",
+      "assets/star.9c945d4c.svg",
+      "assets/mushroom.44406eb8.svg",
+      "assets/fire-flower.b4c5af98.svg"
     ]
   },
   "assets/js/setup.js": {
-    "file": "assets/setup.57NqMLWX.js",
+    "file": "assets/setup.js",
+    "src": "assets/js/setup.js",
     "isEntry": true,
     "imports": [
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.BhDPMm3o.js"
+      "assets/js/index.js"
     ]
   },
-  "assets/js/teams/list.js": {
-    "file": "assets/teamsList.DS8XsOOu.js",
+  "assets/js/settings.js": {
+    "file": "assets/settings.js",
+    "src": "assets/js/settings.js",
     "isEntry": true,
     "imports": [
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.BhDPMm3o.js"
+      "assets/js/index.js",
+      "_clipboard.93846c7e.js"
     ]
   },
-  "assets/js/teams/private.js": {
-    "file": "assets/teamsPrivate.kSWc23ja.js",
+  "assets/js/challenges.js": {
+    "file": "assets/challenges.js",
+    "src": "assets/js/challenges.js",
     "isEntry": true,
     "imports": [
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.BhDPMm3o.js",
-      "assets/clipboard.CfWndw0T.js",
-      "assets/index.C5GHsEEB.js"
+      "assets/js/index.js"
     ]
   },
-  "clipboard.js": {
-    "file": "assets/clipboard.CfWndw0T.js",
-    "isEntry": false,
+  "assets/js/scoreboard.js": {
+    "file": "assets/scoreboard.js",
+    "src": "assets/js/scoreboard.js",
+    "isEntry": true,
     "imports": [
-      "assets/index.BhDPMm3o.js"
+      "assets/js/index.js",
+      "_index.1cf73b05.js",
+      "_echarts.128204f2.js"
+    ]
+  },
+  "assets/js/notifications.js": {
+    "file": "assets/notifications.js",
+    "src": "assets/js/notifications.js",
+    "isEntry": true,
+    "imports": [
+      "assets/js/index.js"
     ]
   },
   "assets/js/teams/public.js": {
-    "file": "assets/teamsPublic.DGg89tHe.js",
+    "file": "assets/teams_public.js",
+    "src": "assets/js/teams/public.js",
     "isEntry": true,
     "imports": [
-      "assets/index.BhDPMm3o.js",
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.C5GHsEEB.js"
+      "assets/js/index.js",
+      "_userscore.b919961c.js",
+      "_index.1cf73b05.js",
+      "_echarts.128204f2.js"
     ]
   },
-  "assets/js/users/list.js": {
-    "file": "assets/usersList.DS8XsOOu.js",
+  "assets/js/teams/private.js": {
+    "file": "assets/teams_private.js",
+    "src": "assets/js/teams/private.js",
     "isEntry": true,
     "imports": [
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.BhDPMm3o.js"
+      "assets/js/index.js",
+      "_clipboard.93846c7e.js",
+      "_userscore.b919961c.js",
+      "_index.1cf73b05.js",
+      "_echarts.128204f2.js"
     ]
   },
-  "assets/js/users/private.js": {
-    "file": "assets/usersPrivate.DKxlsw1i.js",
+  "assets/js/teams/list.js": {
+    "file": "assets/teams_list.js",
+    "src": "assets/js/teams/list.js",
     "isEntry": true,
     "imports": [
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.BhDPMm3o.js",
-      "assets/index.C5GHsEEB.js"
+      "assets/js/index.js"
     ]
   },
   "assets/js/users/public.js": {
-    "file": "assets/usersPublic.0zjobxXt.js",
+    "file": "assets/users_public.js",
+    "src": "assets/js/users/public.js",
     "isEntry": true,
     "imports": [
-      "assets/index.BhDPMm3o.js",
-      "assets/relativeTime.GKSnQAGw.js",
-      "assets/index.C5GHsEEB.js"
+      "assets/js/index.js",
+      "_userscore.b919961c.js",
+      "_index.1cf73b05.js",
+      "_echarts.128204f2.js"
     ]
   },
-  "index.js": {
-    "file": "assets/index.BhDPMm3o.js",
-    "isEntry": false,
+  "assets/js/users/private.js": {
+    "file": "assets/users_private.js",
+    "src": "assets/js/users/private.js",
+    "isEntry": true,
     "imports": [
-      "assets/relativeTime.GKSnQAGw.js"
+      "assets/js/index.js",
+      "_userscore.b919961c.js",
+      "_index.1cf73b05.js",
+      "_echarts.128204f2.js"
     ]
   },
-  "relativeTime.js": {
-    "file": "assets/relativeTime.GKSnQAGw.js",
-    "isEntry": false
+  "assets/js/users/list.js": {
+    "file": "assets/users_list.js",
+    "src": "assets/js/users/list.js",
+    "isEntry": true,
+    "imports": [
+      "assets/js/index.js"
+    ]
+  },
+  "assets/js/color_mode_switcher.js": {
+    "file": "assets/color_mode_switcher.js",
+    "src": "assets/js/color_mode_switcher.js",
+    "isEntry": true
+  },
+  "_echarts.128204f2.js": {
+    "file": "assets/echarts.128204f2.js"
+  },
+  "_clipboard.93846c7e.js": {
+    "file": "assets/clipboard.93846c7e.js",
+    "imports": [
+      "assets/js/index.js"
+    ]
+  },
+  "_index.1cf73b05.js": {
+    "file": "assets/index.1cf73b05.js",
+    "imports": [
+      "_echarts.128204f2.js"
+    ]
+  },
+  "_userscore.b919961c.js": {
+    "file": "assets/userscore.b919961c.js",
+    "imports": [
+      "assets/js/index.js",
+      "_index.1cf73b05.js"
+    ]
+  },
+  "assets/scss/main.scss": {
+    "file": "assets/main.css",
+    "src": "assets/scss/main.scss",
+    "isEntry": true
   }
 }

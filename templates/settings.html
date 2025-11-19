@@ -262,5 +262,6 @@
 {% endblock %}
 
 {% block scripts %}
+  {{ super() }}
   {{ Assets.js("assets/js/settings.js") }}
 {% endblock %}
