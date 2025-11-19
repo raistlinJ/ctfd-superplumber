@@ -600,7 +600,7 @@ body.superplumber-skin td {
 
 .superplumber-stage {
   position: relative;
-  padding-top: 3.5rem;
+  padding-top: 1.75rem;
   padding-bottom: 5rem;
 }
 
@@ -995,9 +995,9 @@ blockquote {
   position: absolute;
   top: 50%;
   right: 0.5rem;
-  width: 3.25rem;
-  height: 5.75rem;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='72' viewBox='0 0 40 72'%3E%3Cpath fill='%23ff4b4b' d='M36 12 L12 4 L12 20 Z'/%3E%3Cpath fill='%23ff4b4b' d='M36 36 L12 28 L12 44 Z'/%3E%3Cpath fill='%23ff4b4b' d='M36 60 L12 52 L12 68 Z'/%3E%3C/svg%3E");
+  width: 4.5rem;
+  height: 11rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='160' viewBox='0 0 48 160'%3E%3Cpath fill='%23ff4b4b' d='M44 16 L16 4 L16 28 Z'/%3E%3Cpath fill='%23ff4b4b' d='M44 48 L16 36 L16 60 Z'/%3E%3Cpath fill='%23ff4b4b' d='M44 80 L16 68 L16 92 Z'/%3E%3Cpath fill='%23ff4b4b' d='M44 112 L16 100 L16 124 Z'/%3E%3Cpath fill='%23ff4b4b' d='M44 144 L16 132 L16 156 Z'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   transform: translate(0, -50%);
