@@ -1,20 +1,4 @@
 {
-  "assets/img/superplumber/star.svg": {
-    "file": "assets/star.9c945d4c.svg",
-    "src": "assets/img/superplumber/star.svg"
-  },
-  "assets/img/superplumber/coin.svg": {
-    "file": "assets/coin.5eb58d7d.svg",
-    "src": "assets/img/superplumber/coin.svg"
-  },
-  "assets/img/superplumber/mushroom.svg": {
-    "file": "assets/mushroom.d116d1db.svg",
-    "src": "assets/img/superplumber/mushroom.svg"
-  },
-  "assets/img/superplumber/fire-flower.svg": {
-    "file": "assets/fire-flower.b4c5af98.svg",
-    "src": "assets/img/superplumber/fire-flower.svg"
-  },
   "assets/img/superplumber/controller.svg": {
     "file": "assets/controller.4ffd8342.svg",
     "src": "assets/img/superplumber/controller.svg"
@@ -27,9 +11,21 @@
     "file": "assets/coin-stack.b51e8861.svg",
     "src": "assets/img/superplumber/coin-stack.svg"
   },
-  "assets/img/superplumber/infinity.svg": {
-    "file": "assets/infinity.1ca86296.svg",
-    "src": "assets/img/superplumber/infinity.svg"
+  "assets/img/superplumber/hill.svg": {
+    "file": "assets/hill.27183a41.svg",
+    "src": "assets/img/superplumber/hill.svg"
+  },
+  "assets/img/superplumber/question-block.svg": {
+    "file": "assets/question-block.7c843269.svg",
+    "src": "assets/img/superplumber/question-block.svg"
+  },
+  "assets/img/superplumber/brick-pattern.svg": {
+    "file": "assets/brick-pattern.7d3dd210.svg",
+    "src": "assets/img/superplumber/brick-pattern.svg"
+  },
+  "assets/img/superplumber/cloud.svg": {
+    "file": "assets/cloud.49e6a367.svg",
+    "src": "assets/img/superplumber/cloud.svg"
   },
   "assets/webfonts/SUPERPLUMBERMAKER.otf": {
     "file": "assets/SUPERPLUMBERMAKER.0eea61f6.otf",
@@ -38,22 +34,6 @@
   "assets/webfonts/SUPERPLUMBER_Font_v3_Solid.otf": {
     "file": "assets/SUPERPLUMBER_Font_v3_Solid.a6f3fa36.otf",
     "src": "assets/webfonts/SUPERPLUMBER_Font_v3_Solid.otf"
-  },
-  "assets/img/superplumber/cloud.svg": {
-    "file": "assets/cloud.49e6a367.svg",
-    "src": "assets/img/superplumber/cloud.svg"
-  },
-  "assets/img/superplumber/hill.svg": {
-    "file": "assets/hill.27183a41.svg",
-    "src": "assets/img/superplumber/hill.svg"
-  },
-  "assets/img/superplumber/brick-pattern.svg": {
-    "file": "assets/brick-pattern.7d3dd210.svg",
-    "src": "assets/img/superplumber/brick-pattern.svg"
-  },
-  "assets/img/superplumber/question-block.svg": {
-    "file": "assets/question-block.7c843269.svg",
-    "src": "assets/img/superplumber/question-block.svg"
   },
   "assets/js/index.js": {
     "file": "assets/index.js",
@@ -66,12 +46,6 @@
     "isEntry": true,
     "imports": [
       "assets/js/index.js"
-    ],
-    "assets": [
-      "assets/coin.5eb58d7d.svg",
-      "assets/star.9c945d4c.svg",
-      "assets/mushroom.d116d1db.svg",
-      "assets/fire-flower.b4c5af98.svg"
     ]
   },
   "assets/js/setup.js": {

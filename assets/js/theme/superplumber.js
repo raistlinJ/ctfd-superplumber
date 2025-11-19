@@ -1,8 +1,22 @@
-import coinIcon from "../../img/superplumber/coin.svg";
-import starIcon from "../../img/superplumber/star.svg";
-import mushroomIcon from "../../img/superplumber/mushroom.svg";
-import fireFlowerIcon from "../../img/superplumber/fire-flower.svg";
+import coinIconSource from "../../img/superplumber/coin.svg?raw";
+import starIconSource from "../../img/superplumber/star.svg?raw";
+import mushroomIconSource from "../../img/superplumber/mushroom.svg?raw";
+import fireFlowerIconSource from "../../img/superplumber/fire-flower.svg?raw";
 import CTFd from "../index";
+
+const svgToDataUri = svg => {
+  if (typeof svg !== "string") {
+    return "";
+  }
+
+  const cleaned = svg.replace(/\s+/g, " ").trim();
+  return `data:image/svg+xml,${encodeURIComponent(cleaned)}`;
+};
+
+const coinIcon = svgToDataUri(coinIconSource);
+const starIcon = svgToDataUri(starIconSource);
+const mushroomIcon = svgToDataUri(mushroomIconSource);
+const fireFlowerIcon = svgToDataUri(fireFlowerIconSource);
 
 const MAX_COINS = 10;
 const MAX_STARS = 5;
@@ -256,6 +270,20 @@ function initSuperplumberTheme() {
     startSuperplumberCoins();
   });
 }
+
+window.addEventListener("pagehide", () => {
+  stopSuperplumberCoins();
+  teardownFloatingIcons();
+});
+
+window.addEventListener("pageshow", event => {
+  if (event.persisted) {
+    runWhenIdle(() => {
+      placeFloatingIcons();
+      startSuperplumberCoins(true);
+    });
+  }
+});
 
 function initStatusBar() {
   const scoreEl = document.querySelector(".js-superplumber-score");

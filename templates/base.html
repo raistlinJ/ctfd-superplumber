@@ -34,6 +34,15 @@
 
   {{ Plugins.styles }}
 
+    <script type="text/javascript">
+      if (!window.__CTFdDeferEvents && window.location) {
+        const host = window.location.hostname;
+        if (host === "localhost" || /^127(?:\.\d+){3}$/.test(host)) {
+          window.__CTFdDeferEvents = true;
+        }
+      }
+    </script>
+
   {{ Assets.js("assets/js/color_mode_switcher.js", type=None) }}
 
   <script type="text/javascript">
