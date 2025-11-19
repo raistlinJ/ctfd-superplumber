@@ -1,5 +1,11 @@
 # Warp Pipe CTF Theme
 
+## Quick Install
+
+1. Download the latest `super-plumberman-theme.zip` release asset.
+2. Unzip the contents directly into `CTFd/themes/super-plumberman` (create the folder if it does not exist).
+3. Restart CTFd if necessary, then pick **Super Plumberman** under **Admin → Config → Theme** and hard-refresh your browser.
+
 Warp Pipe is a Superplumber-inspired reskin of the official CTFd core theme. It keeps the Bootstrap 5 + Alpine.js foundation but swaps in chunky pixel fonts, glowing gradients, floating coins, and parallax scenery so your scoreboard feels like it lives inside World 1-1. All art assets here are original vectors created specifically for this project.
 
 ## Feature Highlights
@@ -15,8 +21,8 @@ Warp Pipe is a Superplumber-inspired reskin of the official CTFd core theme. It 
 Clone the theme next to your CTFd install or develop it standalone:
 
 ```bash
-git clone https://github.com/CTFd/core-beta.git warp-pipe-theme
-cd warp-pipe-theme
+git clone https://github.com/CTFd/core-beta.git super-plumberman-theme
+cd super-plumberman-theme
 ```
 
 Install dependencies (Yarn 1.x or modern npm-compatible Yarn works fine):
@@ -37,7 +43,7 @@ Create a production build before packaging or syncing into `CTFd/themes`:
 yarn build
 ```
 
-Copy the resulting directory (excluding `node_modules`) into `CTFd/themes/warp-pipe` and select it inside the CTFd admin UI.
+Copy the resulting directory (excluding `node_modules`) into `CTFd/themes/super-plumberman` and select it inside the CTFd admin UI.
 
 ## Customization Pointers
 
@@ -73,8 +79,8 @@ Because all of the above are third-party binaries, they remain untracked in git;
 
 When you just want to install the theme (no build tools required):
 
-1. Download the `warp-pipe-theme.zip` asset from the GitHub Releases page.
-2. Extract the archive and copy the resulting folder into your CTFd instance under `CTFd/themes/warp-pipe` (create the directory if it does not exist).
+1. Download the `super-plumberman-theme.zip` asset from the GitHub Releases page.
+2. Extract the archive and copy the resulting folder into your CTFd instance under `CTFd/themes/super-plumberman` (create the directory if it does not exist).
 3. Restart CTFd (if needed) and select "Warp Pipe" from **Admin > Config > Theme**.
 
 The ZIP already contains the compiled `static/` assets, templates, and required fonts, so CTFd can use it immediately.
@@ -86,10 +92,10 @@ If you modify the theme and need a new release package, run:
 ```bash
 yarn build
 mkdir -p dist
-zip -r dist/warp-pipe-theme.zip assets templates static README.md LICENSE.md package.json postcss.config.js vite.config.js scripts .prettierrc.json .prettierignore yarn.lock
+zip -r dist/super-plumberman-theme.zip assets templates static README.md LICENSE.md package.json postcss.config.js vite.config.js scripts .prettierrc.json .prettierignore yarn.lock
 ```
 
-Upload the freshly generated `dist/warp-pipe-theme.zip` as a release asset.
+Upload the freshly generated `dist/super-plumberman-theme.zip` as a release asset.
 
 ## Screenshots
 
