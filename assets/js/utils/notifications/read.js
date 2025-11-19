@@ -1,7 +1,21 @@
 import Alpine from "alpinejs";
 import CTFd from "../../index";
 
+const ensureUnreadStore = () => {
+  if (!Alpine.store("unread_count")) {
+    Alpine.store("unread_count", 0);
+  }
+};
+
+ensureUnreadStore();
+
+if (typeof document !== "undefined") {
+  document.addEventListener("alpine:init", ensureUnreadStore, { once: true });
+}
+
 export default () => {
+  ensureUnreadStore();
+
   CTFd._functions.events.eventCount = count => {
     Alpine.store("unread_count", count);
   };

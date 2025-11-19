@@ -3,8 +3,20 @@ import { Modal } from "../bootstrap";
 
 import CTFd from "../../index";
 
+const ensureModalStore = () => {
+  if (!Alpine.store("modal")) {
+    Alpine.store("modal", { title: "", html: "" });
+  }
+};
+
+ensureModalStore();
+
+if (typeof document !== "undefined") {
+  document.addEventListener("alpine:init", ensureModalStore, { once: true });
+}
+
 export default () => {
-  Alpine.store("modal", { title: "", html: "" });
+  ensureModalStore();
 
   CTFd._functions.events.eventAlert = data => {
     Alpine.store("modal", data);

@@ -2,8 +2,20 @@ import Alpine from "alpinejs";
 import { Toast } from "../bootstrap";
 import CTFd from "../../index";
 
+const ensureToastStore = () => {
+  if (!Alpine.store("toast")) {
+    Alpine.store("toast", { title: "", html: "" });
+  }
+};
+
+ensureToastStore();
+
+if (typeof document !== "undefined") {
+  document.addEventListener("alpine:init", ensureToastStore, { once: true });
+}
+
 export default () => {
-  Alpine.store("toast", { title: "", html: "" });
+  ensureToastStore();
 
   CTFd._functions.events.eventToast = data => {
     Alpine.store("toast", data);

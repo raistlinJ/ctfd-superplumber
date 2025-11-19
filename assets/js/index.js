@@ -89,7 +89,6 @@ CTFd.init(window.init);
       return;
     }
 
-    // Detect legacy ctfd-js builds that still register unload handlers.
     const usesDeprecatedUnload =
       typeof controller.handleEvent === "function" &&
       controller.handleEvent.toString().includes("unload");
