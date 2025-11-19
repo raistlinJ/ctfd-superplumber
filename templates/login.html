@@ -1,34 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <section class="container mario-hero mario-hero--compact">
+  <section class="container superplumber-hero superplumber-hero--compact">
     <div class="row align-items-center g-4">
       <div class="col-lg-7">
-        <p class="mario-hero__badge">{% trans %}Player Select{% endtrans %}</p>
-        <h1 class="mario-hero__title">{% trans %}Log In{% endtrans %}</h1>
-        <p class="mario-hero__subtitle">
+        <p class="superplumber-hero__badge">{% trans %}Player Select{% endtrans %}</p>
+        <h1 class="superplumber-hero__title">{% trans %}Log In{% endtrans %}</h1>
+        <p class="superplumber-hero__subtitle">
           {% trans %}Slide down the warp pipe, punch in your credentials, and hop back into the action.{% endtrans %}
         </p>
         <div class="d-flex flex-wrap gap-3 mt-4">
-          <div class="mario-world-pill">{% trans %}1-UP Ready{% endtrans %}</div>
-          <div class="mario-world-pill">{% trans %}Continue{% endtrans %}</div>
+          <div class="superplumber-world-pill">{% trans %}1-UP Ready{% endtrans %}</div>
+          <div class="superplumber-world-pill">{% trans %}Continue{% endtrans %}</div>
         </div>
       </div>
       <div class="col-lg-5 text-center">
-        <div class="mario-hero__art" aria-hidden="true">
-          <img class="mario-hero__asset mario-hero__asset--flag" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/flag.svg') }}" alt="">
-          <img class="mario-hero__asset mario-hero__asset--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" alt="">
-          <img class="mario-hero__asset mario-hero__asset--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
+        <div class="superplumber-hero__art" aria-hidden="true">
+          <img class="superplumber-hero__asset superplumber-hero__asset--flag" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/flag.svg') }}" alt="">
+          <img class="superplumber-hero__asset superplumber-hero__asset--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pipe.svg') }}" alt="">
+          <img class="superplumber-hero__asset superplumber-hero__asset--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/star.svg') }}" alt="">
         </div>
       </div>
     </div>
   </section>
 
-  <div class="container mario-auth-shell">
+  <div class="container superplumber-auth-shell">
     <div class="row g-5 align-items-center justify-content-center">
       <div class="col-lg-5 col-xl-4">
-        <div class="mario-auth-card">
-          <h2 class="mario-retro text-center mb-4">{% trans %}Player Login{% endtrans %}</h2>
+        <div class="superplumber-auth-card">
+          <h2 class="superplumber-retro text-center mb-4">{% trans %}Player Login{% endtrans %}</h2>
           {% include "components/errors.html" %}
 
           {% if integrations.mlc() %}
@@ -66,7 +66,7 @@
           {% endwith %}
 
           {% if registration_visible() %}
-            <div class="mario-auth-cta mt-4">
+            <div class="superplumber-auth-cta mt-4">
               {% trans %}Need an account?{% endtrans %}
               <a href="{{ url_for('auth.register') }}">{% trans %}Register{% endtrans %}</a>
             </div>
@@ -75,10 +75,10 @@
       </div>
 
       <div class="col-lg-5 col-xl-4">
-        <div class="mario-auth-illustration" aria-hidden="true">
-          <img class="mario-auth-illustration__sprite mario-auth-illustration__sprite--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" alt="">
-          <img class="mario-auth-illustration__sprite mario-auth-illustration__sprite--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
-          <img class="mario-auth-illustration__sprite mario-auth-illustration__sprite--flower" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/fire-flower.svg') }}" alt="">
+        <div class="superplumber-auth-illustration" aria-hidden="true">
+          <img class="superplumber-auth-illustration__sprite superplumber-auth-illustration__sprite--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pipe.svg') }}" alt="">
+          <img class="superplumber-auth-illustration__sprite superplumber-auth-illustration__sprite--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/star.svg') }}" alt="">
+          <img class="superplumber-auth-illustration__sprite superplumber-auth-illustration__sprite--flower" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/fire-flower.svg') }}" alt="">
         </div>
       </div>
     </div>

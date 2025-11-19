@@ -28,7 +28,7 @@ function applyCustomSort(list, { settingKey, label }) {
   } catch (error) {
     sortFailures[settingKey] = true;
     console.warn(
-      `[Mario Theme] Failed to parse ${label} sort function from theme setting "${settingKey}".`,
+      `[Superplumber Theme] Failed to parse ${label} sort function from theme setting "${settingKey}".`,
       error,
     );
     return list;
@@ -37,7 +37,7 @@ function applyCustomSort(list, { settingKey, label }) {
   if (typeof comparator !== "function") {
     sortFailures[settingKey] = true;
     console.warn(
-      `[Mario Theme] Theme setting "${settingKey}" must evaluate to a function but returned`,
+      `[Superplumber Theme] Theme setting "${settingKey}" must evaluate to a function but returned`,
       comparator,
     );
     return list;
@@ -48,7 +48,7 @@ function applyCustomSort(list, { settingKey, label }) {
   } catch (error) {
     sortFailures[settingKey] = true;
     console.warn(
-      `[Mario Theme] Theme setting "${settingKey}" threw while sorting ${label}s.`,
+      `[Superplumber Theme] Theme setting "${settingKey}" threw while sorting ${label}s.`,
       error,
     );
   }
@@ -496,7 +496,7 @@ Alpine.data("ChallengeBoard", () => ({
       this.scrollCueCleanup = null;
     }
 
-    const worldColumns = document.querySelector(".mario-world-columns");
+    const worldColumns = document.querySelector(".superplumber-world-columns");
     if (!worldColumns) {
       return;
     }

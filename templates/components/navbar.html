@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md mario-nav fixed-top">
+<nav class="navbar navbar-expand-md superplumber-nav fixed-top">
   <div class="container">
-    <a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand mario-brand d-flex align-items-center gap-3">
+    <a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand superplumber-brand d-flex align-items-center gap-3">
       {% if Configs.ctf_logo %}
         <img
             class="img-responsive ctf_logo"
@@ -9,11 +9,11 @@
             height="36"
         >
       {% endif %}
-      <div class="mario-brand-copy">
-        <span class="mario-brand-text">{{ Configs.ctf_name }}</span>
-        <small class="mario-brand-tagline text-uppercase">Warp Pipe Edition</small>
-        <span class="mario-brand-controller" aria-hidden="true">
-          <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/controller.svg') }}" alt="">
+      <div class="superplumber-brand-copy">
+        <span class="superplumber-brand-text">{{ Configs.ctf_name }}</span>
+        <small class="superplumber-brand-tagline text-uppercase">Warp Pipe Edition</small>
+        <span class="superplumber-brand-controller" aria-hidden="true">
+          <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/controller.svg') }}" alt="">
         </span>
       </div>
     </a>
@@ -213,8 +213,8 @@
       </ul>
 
       {% if authed() %}
-        <div class="mario-hud d-none d-lg-flex">
-          <div class="mario-life-counter">
+        <div class="superplumber-hud d-none d-lg-flex">
+          <div class="superplumber-life-counter">
             {{ (Team.name if Team else User.name) or _('Player') }}
           </div>
         </div>

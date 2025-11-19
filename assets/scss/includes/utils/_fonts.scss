@@ -1,23 +1,23 @@
 @font-face {
-  font-family: "Mario Solid";
+  font-family: "Superplumber Solid";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("../webfonts/MARIO_Font_v3_Solid.otf") format("opentype");
+  src: url("../webfonts/SUPERPLUMBER_Font_v3_Solid.otf") format("opentype");
 }
 
 @font-face {
-  font-family: "Mario Maker";
+  font-family: "Superplumber Maker";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("../webfonts/MARIOMAKER.otf") format("opentype");
+  src: url("../webfonts/SUPERPLUMBERMAKER.otf") format("opentype");
 }
 
 :root {
-  --mario-font-body: "Mario Solid", "Mario Maker", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --mario-font-retro: "Mario Maker", "Mario Solid", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --bs-body-font-family: var(--mario-font-body);
+  --superplumber-font-body: "Superplumber Solid", "Superplumber Maker", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --superplumber-font-retro: "Superplumber Maker", "Superplumber Solid", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bs-body-font-family: var(--superplumber-font-body);
 }
 
 $fa-font-path: "../webfonts";
@@ -28,14 +28,14 @@ $fa-font-path: "../webfonts";
 html,
 body,
 .container {
-  font-family: var(--mario-font-body);
+  font-family: var(--superplumber-font-body);
 }
 
 h1,
 h2,
 h3,
 .navbar-brand,
-.mario-display {
-  font-family: var(--mario-font-retro);
+.superplumber-display {
+  font-family: var(--superplumber-font-retro);
   letter-spacing: 0.08em;
 }

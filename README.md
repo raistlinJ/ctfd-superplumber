@@ -1,14 +1,14 @@
 # Warp Pipe CTF Theme
 
-Warp Pipe is a Super Mario–inspired reskin of the official CTFd core theme. It keeps the Bootstrap 5 + Alpine.js foundation but swaps in chunky pixel fonts, glowing gradients, floating coins, and parallax scenery so your scoreboard feels like it lives inside World 1-1. All art assets here are original vectors created specifically for this project.
+Warp Pipe is a Superplumber-inspired reskin of the official CTFd core theme. It keeps the Bootstrap 5 + Alpine.js foundation but swaps in chunky pixel fonts, glowing gradients, floating coins, and parallax scenery so your scoreboard feels like it lives inside World 1-1. All art assets here are original vectors created specifically for this project.
 
 ## Feature Highlights
 
-- **Fresh palette & typography** – Nintendo's Mario Maker font family everywhere, plus updated buttons, cards, and nav pills.
+- **Fresh palette & typography** – Nintendo's Superplumber Maker font family everywhere, plus updated buttons, cards, and nav pills.
 - **Layered skyline** – animated clouds, hills, brick floors, and question blocks that respect `prefers-reduced-motion`.
 - **Question-block challenges** – hover lift, solved green glow, and soft shadows keep the board playful without sacrificing usability.
-- **Floating coins** – micro-animation powered by `assets/js/theme/mario.js` for extra whimsy (easy to disable).
-- **Warp-ready scoreboard** – pill headers, neon badges, and softened tables align with the Mario look while staying readable.
+- **Floating coins** – micro-animation powered by `assets/js/theme/superplumber.js` for extra whimsy (easy to disable).
+- **Warp-ready scoreboard** – pill headers, neon badges, and softened tables align with the Superplumber look while staying readable.
 
 ## Quick Start
 
@@ -45,11 +45,11 @@ Copy the resulting directory (excluding `node_modules`) into `CTFd/themes/warp-p
 | --- | --- |
 | Colors, gradients, parallax layers | `assets/scss/main.scss` |
 | Fonts & icon faces | `assets/scss/includes/utils/_fonts.scss` |
-| Mario artwork (clouds, bricks, coins…) | `assets/img/mario/` |
-| Floating coins / particle logic | `assets/js/theme/mario.js` (imported by `assets/js/page.js`) |
+| Superplumber artwork (clouds, bricks, coins…) | `assets/img/superplumber/` |
+| Floating coins / particle logic | `assets/js/theme/superplumber.js` (imported by `assets/js/page.js`) |
 | Layout wrappers & navbar markup | `templates/base.html`, `templates/components/navbar.html` |
 
-The background animation automatically disables when visitors opt into reduced motion. Remove the `import "./theme/mario";` line from `assets/js/page.js` if you prefer a static scene.
+The background animation automatically disables when visitors opt into reduced motion. Remove the `import "./theme/superplumber";` line from `assets/js/page.js` if you prefer a static scene.
 
 ## Available Scripts
 
@@ -60,7 +60,7 @@ The background animation automatically disables when visitors opt into reduced m
 | `yarn format` | Applies Prettier to everything under `assets/` |
 | `yarn lint` | Checks formatting without modifying files |
 | `yarn verify` | Production build + git diff cleanliness check |
-| `yarn fetch:mario-font` | Downloads the proprietary Mario font binaries into `assets/webfonts/` (auto-runs before dev/build) |
+| `yarn fetch:superplumber-font` | Downloads the Superplumber font binaries into `assets/webfonts/` (auto-runs before dev/build) |
 
 ## Directory Layout
 

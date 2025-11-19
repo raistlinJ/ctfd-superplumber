@@ -1,16 +1,16 @@
 {
-  "name": "mario-pipe-theme",
+  "name": "superplumber-pipe-theme",
   "private": true,
   "version": "1.0.0",
   "scripts": {
     "dev": "vite build --watch --mode=development",
-    "predev": "yarn fetch:mario-font",
-    "prebuild": "yarn fetch:mario-font",
+    "predev": "yarn fetch:superplumber-font",
+    "prebuild": "yarn fetch:superplumber-font",
     "build": "vite build",
     "format": "prettier --write assets/",
     "lint": "prettier --check assets/",
     "verify": "vite build; git diff --quiet --exit-code",
-    "fetch:mario-font": "node scripts/fetch-mario-font.js"
+    "fetch:superplumber-font": "node scripts/fetch-superplumber-font.js"
   },
   "dependencies": {
     "@ctfdio/ctfd-js": "^0.0.18",

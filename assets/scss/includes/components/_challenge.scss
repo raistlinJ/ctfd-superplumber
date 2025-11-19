@@ -9,13 +9,13 @@
   }
 }
 
-body.mario-skin .modal-dialog {
+body.superplumber-skin .modal-dialog {
   max-width: min(1000px, calc(100vw - 2rem));
   width: 100%;
 }
 
 @media (min-width: 1200px) {
-  body.mario-skin .modal-dialog {
+  body.superplumber-skin .modal-dialog {
     max-width: 1040px;
   }
 }
@@ -60,7 +60,7 @@ body.mario-skin .modal-dialog {
 }
 
 [data-bs-theme="light"] .modal .alert {
-  color: var(--mario-text-soft);
+  color: var(--superplumber-text-soft);
 }
 
 [data-bs-theme="dark"] .modal .alert {

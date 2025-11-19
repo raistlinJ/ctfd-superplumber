@@ -1,46 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <section class="container mario-hero">
+  <section class="container superplumber-hero">
     <div class="row align-items-center g-4">
       <div class="col-lg-7">
-        <p class="mario-hero__badge">
+        <p class="superplumber-hero__badge">
           {% trans %}World Map{% endtrans %}
         </p>
-        <h1 class="mario-hero__title">{% trans %}Challenges{% endtrans %}</h1>
-        <p class="mario-hero__subtitle">
+        <h1 class="superplumber-hero__title">{% trans %}Challenges{% endtrans %}</h1>
+        <p class="superplumber-hero__subtitle">
           {% trans %}Smash question blocks, grab the hidden coins, and unlock every flag along the path to the castle.{% endtrans %}
         </p>
         <div class="d-flex flex-wrap gap-3 mt-4">
-          <div class="mario-world-pill">{% trans %}World{% endtrans %} 1-1</div>
+          <div class="superplumber-world-pill">{% trans %}World{% endtrans %} 1-1</div>
         </div>
       </div>
       <div class="col-lg-5 text-center">
-        <div class="mario-hero__art" aria-hidden="true">
-          <img class="mario-hero__asset mario-hero__asset--flag" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/flag.svg') }}" alt="">
-          <img class="mario-hero__asset mario-hero__asset--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" alt="">
-          <img class="mario-hero__asset mario-hero__asset--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
-          <img class="mario-hero__gif mario-hero__gif--runner" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-mario-run.gif') }}" alt="">
-          <img class="mario-hero__gif mario-hero__gif--coin" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-coin-spin.gif') }}" alt="">
-          <img class="mario-hero__gif mario-hero__gif--goomba" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-goomba.gif') }}" alt="">
+        <div class="superplumber-hero__art" aria-hidden="true">
+          <img class="superplumber-hero__asset superplumber-hero__asset--flag" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/flag.svg') }}" alt="">
+          <img class="superplumber-hero__asset superplumber-hero__asset--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pipe.svg') }}" alt="">
+          <img class="superplumber-hero__asset superplumber-hero__asset--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/star.svg') }}" alt="">
+          <img class="superplumber-hero__gif superplumber-hero__gif--runner" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pixel-superplumber-run.gif') }}" alt="">
+          <img class="superplumber-hero__gif superplumber-hero__gif--coin" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pixel-coin-spin.gif') }}" alt="">
+          <img class="superplumber-hero__gif superplumber-hero__gif--goomba" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pixel-goomba.gif') }}" alt="">
         </div>
       </div>
     </div>
   </section>
 
-  <div class="container mario-star-strip" aria-hidden="true">
+  <div class="container superplumber-star-strip" aria-hidden="true">
     {% for _ in range(3) %}
-      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
+      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/star.svg') }}" alt="">
     {% endfor %}
   </div>
 
-  <div class="container mario-pipe-stack" aria-hidden="true">
+  <div class="container superplumber-pipe-stack" aria-hidden="true">
     {% set pipe_scales = [1, 1.25, 0.85, 1.15] %}
     {% for scale in pipe_scales %}
-      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" style="--pipe-scale: {{ '%.2f' % scale }};" alt="">
+      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pipe.svg') }}" style="--pipe-scale: {{ '%.2f' % scale }};" alt="">
     {% endfor %}
   </div>
-  <div class="mario-rainbow-divider" aria-hidden="true"></div>
+  <div class="superplumber-rainbow-divider" aria-hidden="true"></div>
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -67,34 +67,34 @@
       </div>
 
       <div x-show="loaded">
-        <div class="mario-world-map">
-          <div class="mario-world-artifact mario-world-artifact--cloud">
-            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/cloud.svg') }}" alt="">
+        <div class="superplumber-world-map">
+          <div class="superplumber-world-artifact superplumber-world-artifact--cloud">
+            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/cloud.svg') }}" alt="">
           </div>
-          <div class="mario-world-artifact mario-world-artifact--hill">
-            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/hill.svg') }}" alt="">
+          <div class="superplumber-world-artifact superplumber-world-artifact--hill">
+            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/hill.svg') }}" alt="">
           </div>
-          <div class="mario-world-artifact mario-world-artifact--flower">
-            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/fire-flower.svg') }}" alt="">
+          <div class="superplumber-world-artifact superplumber-world-artifact--flower">
+            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/fire-flower.svg') }}" alt="">
           </div>
-          <div class="mario-world-artifact mario-world-artifact--coin">
-            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-coin-spin.gif') }}" alt="">
+          <div class="superplumber-world-artifact superplumber-world-artifact--coin">
+            <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pixel-coin-spin.gif') }}" alt="">
           </div>
-          <div class="mario-world-columns">
+          <div class="superplumber-world-columns">
             <template x-for="(category, idx) in getCategories()" :key="idx">
-              <section class="mario-world-column" :class="{'is-last': idx === getCategories().length - 1}">
-                <div class="mario-world-level">
-                  <span class="mario-world-level__badge" x-text="`World ${idx + 1}`"></span>
+              <section class="superplumber-world-column" :class="{'is-last': idx === getCategories().length - 1}">
+                <div class="superplumber-world-level">
+                  <span class="superplumber-world-level__badge" x-text="`World ${idx + 1}`"></span>
                   <h3 x-text="category"></h3>
                 </div>
-                <div class="mario-world-pipe" aria-hidden="true">
-                  <span class="mario-world-pipe__top"></span>
-                  <span class="mario-world-pipe__stem"></span>
+                <div class="superplumber-world-pipe" aria-hidden="true">
+                  <span class="superplumber-world-pipe__top"></span>
+                  <span class="superplumber-world-pipe__stem"></span>
                 </div>
-                <div class="mario-world-stage">
-                  <div class="mario-world-stage__grid">
+                <div class="superplumber-world-stage">
+                  <div class="superplumber-world-stage__grid">
                     <template x-for="(c, cidx) in getChallenges(category)" :key="c.id">
-                      <div class="mario-world-node">
+                      <div class="superplumber-world-node">
                         <button
                             class="challenge-button btn btn-dark"
                             :class="[

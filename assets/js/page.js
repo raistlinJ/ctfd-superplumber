@@ -1,6 +1,6 @@
 import Alpine from "alpinejs";
 import CTFd from "./index";
-import "./theme/mario";
+import "./theme/superplumber";
 
 window.CTFd = CTFd;
 window.Alpine = Alpine;

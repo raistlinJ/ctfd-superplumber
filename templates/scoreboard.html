@@ -1,43 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <section class="container mario-hero">
+  <section class="container superplumber-hero">
     <div class="row align-items-center g-4">
       <div class="col-lg-7">
-        <p class="mario-hero__badge">
+        <p class="superplumber-hero__badge">
           {% trans %}Live Ranking{% endtrans %}
         </p>
-        <h1 class="mario-hero__title">{% trans %}Scoreboard{% endtrans %}</h1>
-        <p class="mario-hero__subtitle">
+        <h1 class="superplumber-hero__title">{% trans %}Scoreboard{% endtrans %}</h1>
+        <p class="superplumber-hero__subtitle">
           {{ Configs.ctf_description or _('Collect coins, capture flags, and race to the top of the warp pipe leaderboard.') }}
         </p>
         <div class="d-flex flex-wrap gap-3 mt-4">
-          <div class="mario-world-pill">{% trans %}World{% endtrans %} 1-1</div>
-          <div class="mario-world-pill">{% trans %}Power-ups{% endtrans %}: ⭐️</div>
-          <div class="mario-world-pill">{% trans %}Goal{% endtrans %}: {% trans %}Castle{% endtrans %}</div>
+          <div class="superplumber-world-pill">{% trans %}World{% endtrans %} 1-1</div>
+          <div class="superplumber-world-pill">{% trans %}Power-ups{% endtrans %}: ⭐️</div>
+          <div class="superplumber-world-pill">{% trans %}Goal{% endtrans %}: {% trans %}Castle{% endtrans %}</div>
         </div>
       </div>
       <div class="col-lg-5 text-center">
-        <div class="mario-hero__art" aria-hidden="true">
-          <img class="mario-hero__asset mario-hero__asset--castle" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/castle.svg') }}" alt="">
-          <img class="mario-hero__asset mario-hero__asset--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" alt="">
-          <img class="mario-hero__asset mario-hero__asset--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
-          <img class="mario-hero__gif mario-hero__gif--runner" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-mario-run.gif') }}" alt="">
-          <img class="mario-hero__gif mario-hero__gif--coin" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-coin-spin.gif') }}" alt="">
-          <img class="mario-hero__gif mario-hero__gif--goomba" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pixel-goomba.gif') }}" alt="">
+        <div class="superplumber-hero__art" aria-hidden="true">
+          <img class="superplumber-hero__asset superplumber-hero__asset--castle" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/castle.svg') }}" alt="">
+          <img class="superplumber-hero__asset superplumber-hero__asset--pipe" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pipe.svg') }}" alt="">
+          <img class="superplumber-hero__asset superplumber-hero__asset--star" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/star.svg') }}" alt="">
+          <img class="superplumber-hero__gif superplumber-hero__gif--runner" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pixel-superplumber-run.gif') }}" alt="">
+          <img class="superplumber-hero__gif superplumber-hero__gif--coin" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pixel-coin-spin.gif') }}" alt="">
+          <img class="superplumber-hero__gif superplumber-hero__gif--goomba" src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pixel-goomba.gif') }}" alt="">
         </div>
       </div>
     </div>
   </section>
-  <div class="container mario-star-strip" aria-hidden="true">
+  <div class="container superplumber-star-strip" aria-hidden="true">
     {% for _ in range(4) %}
-      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/star.svg') }}" alt="">
+      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/star.svg') }}" alt="">
     {% endfor %}
   </div>
-  <div class="container mario-pipe-stack" aria-hidden="true">
+  <div class="container superplumber-pipe-stack" aria-hidden="true">
     {% set pipe_scales = [1.1, 0.9, 1.35] %}
     {% for scale in pipe_scales %}
-      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/mario/pipe.svg') }}" style="--pipe-scale: {{ '%.2f' % scale }};" alt="">
+      <img src="{{ url_for('views.themes', theme=Configs.theme or 'core-beta', path='img/superplumber/pipe.svg') }}" style="--pipe-scale: {{ '%.2f' % scale }};" alt="">
     {% endfor %}
   </div>
   <div class="container">
@@ -67,20 +67,20 @@
           <thead>
           <tr>
             <th style="width: 10px">
-              <span class="mario-standing-label">
-                <span class="mario-mini-icon mario-mini-icon--star" aria-hidden="true"></span>
+              <span class="superplumber-standing-label">
+                <span class="superplumber-mini-icon superplumber-mini-icon--star" aria-hidden="true"></span>
                 {% trans %}Place{% endtrans %}
               </span>
             </th>
             <th class="text-start ps-3">
-              <span class="mario-standing-label">
-                <span class="mario-mini-icon mario-mini-icon--controller" aria-hidden="true"></span>
+              <span class="superplumber-standing-label">
+                <span class="superplumber-mini-icon superplumber-mini-icon--controller" aria-hidden="true"></span>
                 {{ get_mode_as_word(capitalize=True) }}
               </span>
             </th>
             <th class="text-center">
-              <span class="mario-score-icon mario-score-icon--coin">
-                <span class="mario-mini-icon mario-mini-icon--coin" aria-hidden="true"></span>
+              <span class="superplumber-score-icon superplumber-score-icon--coin">
+                <span class="superplumber-mini-icon superplumber-mini-icon--coin" aria-hidden="true"></span>
                 {% trans %}Score{% endtrans %}
               </span>
             </th>
@@ -91,15 +91,15 @@
             <template x-for="(standing, index) in standings.filter(i => activeBracket ? i.bracket_id==activeBracket : true)">
               <tr>
                 <th scope="row" class="text-center">
-                  <span class="mario-standing-label">
-                    <span class="mario-standing-icon" :class="{'is-top': index < 3}">
+                  <span class="superplumber-standing-label">
+                    <span class="superplumber-standing-icon" :class="{'is-top': index < 3}">
                       <span x-text="index + 1"></span>
                     </span>
                   </span>
                 </th>
                 <td class="text-start">
                   <a :href="standing.account_url" class="d-inline-flex align-items-center gap-2">
-                    <span class="mario-mini-icon" :class="index % 2 === 0 ? 'mario-mini-icon--coin' : 'mario-mini-icon--star'" aria-hidden="true"></span>
+                    <span class="superplumber-mini-icon" :class="index % 2 === 0 ? 'superplumber-mini-icon--coin' : 'superplumber-mini-icon--star'" aria-hidden="true"></span>
                     <span x-text="standing.name"></span>
                   </a>
                   <template x-if="standing.bracket_name">
@@ -107,8 +107,8 @@
                   </template>
                 </td>
                 <td class="text-center">
-                  <span class="mario-score-icon mario-score-icon--coin d-inline-flex align-items-center justify-content-center gap-2">
-                    <span class="mario-mini-icon" :class="index < 3 ? 'mario-mini-icon--stack' : 'mario-mini-icon--coin'" aria-hidden="true"></span>
+                  <span class="superplumber-score-icon superplumber-score-icon--coin d-inline-flex align-items-center justify-content-center gap-2">
+                    <span class="superplumber-mini-icon" :class="index < 3 ? 'superplumber-mini-icon--stack' : 'superplumber-mini-icon--coin'" aria-hidden="true"></span>
                     <span x-text="standing.score"></span>
                   </span>
                 </td>

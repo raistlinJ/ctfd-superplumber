@@ -59,60 +59,60 @@
 
   {{ Configs.theme_header }}
 </head>
-<body class="mario-skin">
+<body class="superplumber-skin">
 {% include "components/navbar.html" %}
 
 {% if authed() %}
   {% if Configs.user_mode == "teams" and Team %}
-    {% set _mario_score = (Team.score or 0)|int %}
-    {% set _mario_solve_count = (Team.solves | default([], true) | length) %}
-    {% set _mario_rank = (Team.place or 0)|int %}
+    {% set _superplumber_score = (Team.score or 0)|int %}
+    {% set _superplumber_solve_count = (Team.solves | default([], true) | length) %}
+    {% set _superplumber_rank = (Team.place or 0)|int %}
   {% else %}
-    {% set _mario_score = (User.score or 0)|int %}
-    {% set _mario_solve_count = (User.solves | default([], true) | length) %}
-    {% set _mario_rank = (User.place or 0)|int %}
+    {% set _superplumber_score = (User.score or 0)|int %}
+    {% set _superplumber_solve_count = (User.solves | default([], true) | length) %}
+    {% set _superplumber_rank = (User.place or 0)|int %}
   {% endif %}
 {% else %}
-  {% set _mario_score = 0 %}
-  {% set _mario_solve_count = 0 %}
-  {% set _mario_rank = 0 %}
+  {% set _superplumber_score = 0 %}
+  {% set _superplumber_solve_count = 0 %}
+  {% set _superplumber_rank = 0 %}
 {% endif %}
-{% set _mario_star_count = 0 %}
-<div class="mario-status-bar" aria-label="{% trans %}Mario status display{% endtrans %}">
+{% set _superplumber_star_count = 0 %}
+<div class="superplumber-status-bar" aria-label="{% trans %}Superplumber status display{% endtrans %}">
   <div class="container">
-    <div class="mario-status-inner">
-      <div class="mario-status-cell">
-        <span class="mario-status-label">{% trans %}World{% endtrans %}</span>
-        <span class="mario-status-value">CTF</span>
+    <div class="superplumber-status-inner">
+      <div class="superplumber-status-cell">
+        <span class="superplumber-status-label">{% trans %}World{% endtrans %}</span>
+        <span class="superplumber-status-value">CTF</span>
       </div>
-      <div class="mario-status-cell">
-        <span class="mario-status-label">{% trans %}Score{% endtrans %}</span>
-        <span class="mario-status-value js-mario-score" data-mario-score="{{ _mario_score }}">{{ "%06d"|format(_mario_score) }}</span>
+      <div class="superplumber-status-cell">
+        <span class="superplumber-status-label">{% trans %}Score{% endtrans %}</span>
+        <span class="superplumber-status-value js-superplumber-score" data-superplumber-score="{{ _superplumber_score }}">{{ "%06d"|format(_superplumber_score) }}</span>
       </div>
-      <div class="mario-status-cell">
-        <span class="mario-status-label">{% trans %}Lives{% endtrans %}</span>
-        <span class="mario-status-value mario-status-value--lives" aria-label="{% trans %}Infinite lives{% endtrans %}">
+      <div class="superplumber-status-cell">
+        <span class="superplumber-status-label">{% trans %}Lives{% endtrans %}</span>
+        <span class="superplumber-status-value superplumber-status-value--lives" aria-label="{% trans %}Infinite lives{% endtrans %}">
           <span class="visually-hidden">&infin;</span>
         </span>
       </div>
-      <div class="mario-status-cell">
-        <span class="mario-status-label">{% trans %}Rank{% endtrans %}</span>
-        <span class="mario-status-value mario-status-value--rank js-mario-rank" data-mario-rank="{{ _mario_rank }}">{{ "#%03d"|format(_mario_rank) }}</span>
+      <div class="superplumber-status-cell">
+        <span class="superplumber-status-label">{% trans %}Rank{% endtrans %}</span>
+        <span class="superplumber-status-value superplumber-status-value--rank js-superplumber-rank" data-superplumber-rank="{{ _superplumber_rank }}">{{ "#%03d"|format(_superplumber_rank) }}</span>
       </div>
     </div>
   </div>
 </div>
 
-<div class="mario-scenery" aria-hidden="true">
-  <div class="mario-clouds"></div>
-  <div class="mario-hills"></div>
-  <div class="mario-ground">
-    <span class="mario-question mario-question--left"></span>
-    <span class="mario-question mario-question--right"></span>
+<div class="superplumber-scenery" aria-hidden="true">
+  <div class="superplumber-clouds"></div>
+  <div class="superplumber-hills"></div>
+  <div class="superplumber-ground">
+    <span class="superplumber-question superplumber-question--left"></span>
+    <span class="superplumber-question superplumber-question--right"></span>
   </div>
 </div>
 
-<main role="main" class="mario-stage">
+<main role="main" class="superplumber-stage">
   {% block content %}
   {% endblock %}
 </main>
